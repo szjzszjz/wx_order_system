@@ -1,7 +1,7 @@
 # wx_order_system
 微信点餐系统
 
-系统要求：  
+* 系统要求：  
 Linux：centos7.3  
 jdk:1.8.0  
 mysql:5.7.17  
@@ -11,7 +11,43 @@ springboot：1.5.2
 idea:2017.1.2  
 maven:3.3.9  
 
-表格：  
+* 虚拟机系统：centos7.3  
+账号：root  
+密码：123456  
+
+* 包括的软件  
+jdk 1.8.0.11   
+nginx 1.11.7  
+mysql 5.7.17  
+redis 3.2.8  
+
+* jdk  
+路径 /usr/local/jdk1.8.0  
+
+* nginx  
+路径 /usr/local/nginx  
+启动 nginx  
+重启 nginx -s reload  
+
+* mysql  
+配置 /etc/myconf  
+账号 root  
+密码 123456  
+端口 3306  
+启动 systemctl start mysql  
+停止 systemctl stop mysql  
+
+* redis  
+路径 /usr/local/redis  
+配置 /etc/reis.conf  
+端口 6379  
+密码 123456  
+启动 systemctl start redis  
+停止 systemctl stop redis  
+
+
+
+* 表格：  
 ```
 create table `product_info` (
 	`product_id` varchar(32) not null,
