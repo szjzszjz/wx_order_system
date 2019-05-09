@@ -1,9 +1,11 @@
 package com.szjz.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.szjz.sell.dataobject.OrderDetail;
 import com.szjz.sell.dataobject.OrderMaster;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -13,7 +15,33 @@ import java.util.List;
  */
 
 @Data
+
+@JsonInclude(JsonInclude.Include.NON_NULL) //如果字段為null则不返回 给前端
 public class OrderDTO extends OrderMaster {
+
+    /** 订单id */
+    private String orderId;
+
+    /** 买家名字 */
+    private String buyerName;
+
+    /** 买家手机号 */
+    private String buyerPhone;
+
+    /** 买家地址 */
+    private String buyerAddress;
+
+    /** 买家微信openid */
+    private String buyerOpenid;
+
+    /** 订单总金额 */
+    private BigDecimal orderAmount;
+
+    /** 订单状态 默认新订单0*/
+    private Integer orderStatus;
+
+    /** 支付状态 默认等待支付0*/
+    private Integer payStatus;
 
     /** 添加订单详情列表 */
     private List<OrderDetail> orderDetailList;

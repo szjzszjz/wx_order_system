@@ -1,5 +1,6 @@
 package com.szjz.sell.service;
 
+import com.szjz.sell.dataobject.OrderDetail;
 import com.szjz.sell.dataobject.OrderMaster;
 import com.szjz.sell.dto.OrderDTO;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,8 @@ public interface OrderService {
 
     /** 查询某个用户的订单列表 */
     Page<OrderDTO> findAll(String buyerOpenid ,Pageable pageable);
+
+    Page<OrderDetail> findOrderDetailList(String orderId, Pageable pageable);
 
     /** 取消订单 */
     OrderDTO cancelOrder(OrderDTO orderDTO);

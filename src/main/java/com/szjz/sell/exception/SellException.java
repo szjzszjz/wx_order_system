@@ -15,4 +15,9 @@ public class SellException extends RuntimeException{
         super(resultEnum.getMessage());//将message传到父类的构造方法中
         this.code = resultEnum.PRODUCT_NOT_EXIST.getCode();
     }
+
+    public SellException(Integer code, String msg) {
+        super(msg);//将message传到父类的构造方法中
+        this.code = code;
+    }
 }

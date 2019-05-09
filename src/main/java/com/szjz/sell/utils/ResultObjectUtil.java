@@ -1,5 +1,6 @@
 package com.szjz.sell.utils;
 
+import com.szjz.sell.enums.ResultEnum;
 import com.szjz.sell.resultObject.ResultObject;
 
 /**
@@ -9,28 +10,54 @@ import com.szjz.sell.resultObject.ResultObject;
  */
 public class ResultObjectUtil {
 
-    /** 成功获取数据返回 */
-    public static ResultObject success(Object data){
+    /**
+     * 成功获取数据返回
+     */
+    public static ResultObject success(Object data) {
         ResultObject<Object> ro = new ResultObject<>();
-        ro.setMsg("成功");
+        ro.setMessage("成功");
         ro.setCode(200);
         ro.setData(data);
-        return  ro;
+        return ro;
     }
 
-    /** 返回无数据的结果 */
-    public static ResultObject success(){
+    /**
+     * 成功 返回无数据的结果
+     */
+    public static ResultObject success() {
         ResultObject<Object> ro = new ResultObject<>();
         ro.setCode(200);
-        ro.setMsg("成功");
+        ro.setMessage("成功");
         return ro;
     }
 
-    /** 返回错误 */
-    public static ResultObject error(Integer code, String msg){
+    /**
+     * 成功 返回枚举信息
+     */
+    public static ResultObject success(ResultEnum resultEnum) {
         ResultObject<Object> ro = new ResultObject<>();
-        ro.setCode(code);
-        ro.setMsg(msg);
+        ro.setCode(resultEnum.getCode());
+        ro.setMessage(resultEnum.getMessage());
         return ro;
     }
+
+    /**
+     * 返回错误 错误代码 信息
+     */
+    public static ResultObject error(Integer code, String msg) {
+        ResultObject<Object> ro = new ResultObject<>();
+        ro.setCode(code);
+        ro.setMessage(msg);
+        return ro;
+    }
+
+    /** 返回错误 枚举信息 */
+    public static ResultObject error(ResultEnum resultEnum){
+        ResultObject<Object> ro = new ResultObject<>();
+        ro.setCode(resultEnum.getCode());
+        ro.setMessage(resultEnum.getMessage());
+        return ro;
+    }
+
+
 }

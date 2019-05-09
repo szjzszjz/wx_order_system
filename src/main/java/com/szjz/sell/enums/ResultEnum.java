@@ -9,9 +9,26 @@ import lombok.Getter;
 
 @Getter
 public enum ResultEnum {
-    /** shift + ctrl + u 小写变大写 */
+    /** shift + ctrl + u 大小写相互转换*/
     PRODUCT_NOT_EXIST(0 ,"商品不存在"),
-    PRODUCT_STOCK_ERROR(1, "商品库存不足")
+    PRODUCT_STOCK_ERROR(1, "商品库存不足"),
+    ORDER_NOT_EXIST(2,"订单不存在"),
+    ORDER_DETAIL_NOT_EXIST(2,"订单详情不存在"),
+    ORDER_STATUS_ERROR(3,"订单状态异常"),
+    ORDER_UPDATE_FAIL(4,"订单更新失败"),
+    ORDER_PAY_STATUS_ERROR(5,"订单支付状态异常"),
+
+    ORDER_CREATE_FAIL(6,"创建订单失败"),
+
+    PARAMETER_ERROR(7,"参数不正确"),
+
+    CAR_IS_EMPTY(8,"购物车为空"),
+
+    RESULT_IS_EMPTY(9,"查询结果为空"),
+
+    OWNER_IS_ERROR(10,"非当前登录用户")
+
+
     ;
 
     private Integer code;

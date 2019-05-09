@@ -7,6 +7,10 @@ spring:
 
   jpa:
     show-sql: true
+
+  jackson:
+    default-property-inclusion: non_null #全局配置 若返回字段为null 则不返回给前端
+
 server:
   servlet:
     context-path: /sell

@@ -40,8 +40,8 @@ public class OrderDetailRepositoryTest {
     }
 
     @Test
-    public void findByOrOrderId(){
-        List<OrderDetail> list = repository.findByOrOrderId("123");
+    public void findByOrderId(){
+        List<OrderDetail> list = repository.findByOrderId("123");
         System.err.println(list);
     }
 
