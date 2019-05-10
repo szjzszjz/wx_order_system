@@ -26,7 +26,9 @@ public enum ResultEnum {
 
     RESULT_IS_EMPTY(9,"查询结果为空"),
 
-    OWNER_IS_ERROR(10,"非当前登录用户")
+    OWNER_IS_ERROR(10,"非当前登录用户"),
+
+    WX_MP_ERROR(11,"微信公众号方面出现错误")
 
 
     ;

@@ -8,8 +8,11 @@ spring:
   jpa:
     show-sql: true
 
-  jackson:
-    default-property-inclusion: non_null #全局配置 若返回字段为null 则不返回给前端
+#  mvc:
+#    static-path-pattern: /img/img.jpg (thyemleaf依赖替代)
+
+#  jackson:
+#    default-property-inclusion: non_null #全局配置 若返回字段为null 则不返回给前端
 
 server:
   servlet:
@@ -21,3 +24,13 @@ server:
 #    console: "%d - %msg%n"
 ##  path: /var/log/tomcat/
 #file: /var/log/tomcat/sell.log
+
+
+#wechat:
+#  mpAppId: wx361556cc26ac4671
+#  mpAppSecret: 8d8c86bd7aafa56bbd30c65b5c093417
+
+#微信公众号测试账号
+wechat:
+  mpAppId: wx6ba6afb880210b8f
+  mpAppSecret: 41338b71706a08b2da62de50ad95e6a6

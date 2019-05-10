@@ -45,6 +45,21 @@ redis 3.2.8
 启动 systemctl start redis  
 停止 systemctl stop redis  
 
+* 微信网页授权  
+官方文档
+https://mp.weixin.qq.com/wiki  
+调试工具
+https://natapp.cn  
+第三方SDK
+https://github.com/Wechat-Group/WxJava  
+
+* 微信支付  
+官方文档：
+https://pay.weixin.qq.com/wiki  
+第三方SDK:
+https://github.com/Pay-Group/best-pay-sdk  
+
+
 
 
 * 表格：  

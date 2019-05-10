@@ -31,6 +31,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author szjz
@@ -125,6 +126,7 @@ public class BuyerOrderController {
         if (page.getContent().size()==0){
             return ResultObjectUtil.success(ResultEnum.RESULT_IS_EMPTY);
         }
+
         return ResultObjectUtil.success(page.getContent());
     }
 
