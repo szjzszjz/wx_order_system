@@ -28,9 +28,8 @@ public enum ResultEnum {
 
     OWNER_IS_ERROR(10,"非当前登录用户"),
 
-    WX_MP_ERROR(11,"微信公众号方面出现错误")
-
-
+    WX_MP_ERROR(11,"微信公众号方面出现错误"),
+    WXPAY_NOTIFY_MONEY_VERIFY_ERROR(12 ,"微信支付通知金额验证异常")
     ;
 
     private Integer code;

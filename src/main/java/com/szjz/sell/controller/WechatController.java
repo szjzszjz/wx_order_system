@@ -39,6 +39,7 @@ public class WechatController {
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
         //配置
         //调用方法
+        log.info("【微信网页授权】 开始授权，，，returnUrl={}",returnUrl);
         String url = "http://szjz.natapp1.cc/sell/wechat/userInfo";
         url = URLEncoder.DEFAULT.encode(url, Charset.forName("utf-8"));
         String encodeUrl = URLEncoder.DEFAULT.encode(returnUrl, Charset.forName("utf-8"));
@@ -58,6 +59,7 @@ public class WechatController {
             throw new SellException(ResultEnum.WX_MP_ERROR.getCode(), e.getError().getErrorMsg());
         }
         String openId = wxMpOAuth2AccessToken.getOpenId();
+        log.info("【微信网页授权】 成功！openid={}",openId);
         return "redirect:"+returnUrl + "?openid=" + openId;
     }
 
