@@ -38,4 +38,10 @@ public class PayServiceImplTest {
         OrderDTO orderDTO = orderService.findById("123");
         payService.create(orderDTO);
     }
+
+    @Test
+    public void refund(){
+        OrderDTO orderDTO = orderService.findById("123");
+        payService.refund(orderDTO);
+    }
 }

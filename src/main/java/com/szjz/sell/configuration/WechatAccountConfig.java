@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author szjz
  * @date 2019/5/10 15:19
- * 微信账号配置
+ * 微信账户配置
  */
 
 @Data

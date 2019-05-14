@@ -79,6 +79,15 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    public void findList(){
+        PageRequest request = PageRequest.of(0, 2);
+        Page<OrderDTO> page = orderService.findList(request);
+        System.err.println(page.getTotalPages());
+        System.err.println(page.getTotalElements());
+        System.err.println(page.getContent());
+        System.err.println(page.getNumber());
+    }
+    @Test
     public void cancelOrder() {
         OrderDTO orderDTO = orderService.findById("123");
         OrderDTO orderDTO1 = orderService.cancelOrder(orderDTO);

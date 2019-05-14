@@ -1,5 +1,4 @@
 <script>
-    //不用了，可以删除
     function onBridgeReady(){
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', {

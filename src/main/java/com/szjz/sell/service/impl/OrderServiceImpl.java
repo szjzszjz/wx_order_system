@@ -15,6 +15,7 @@ import com.szjz.sell.repository.OrderDetailRepository;
 import com.szjz.sell.repository.OrderMasterRepository;
 import com.szjz.sell.repository.ProductInfoRepository;
 import com.szjz.sell.service.OrderService;
+import com.szjz.sell.service.PayService;
 import com.szjz.sell.service.ProductInfoService;
 import com.szjz.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private PayService payService;
 
     @Override
     @Transactional //一旦发生异常回退 不扣除库存
@@ -130,6 +134,15 @@ public class OrderServiceImpl implements OrderService {
         return orderDTOPage;
     }
 
+    /** 获取所有用户的订单 */
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.converter(orderMasterPage.getContent());
+        PageImpl<OrderDTO> orderDTOPage = new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+        return orderDTOPage;
+    }
+
     /** 获取订单详情列表 */
     @Override
     public Page<OrderDetail> findOrderDetailList(String orderId, Pageable pageable) {
@@ -154,7 +167,7 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(orderDTO,orderMaster);
         OrderMaster result = orderMasterRepository.save(orderMaster);
         if (result == null){//对保存结果检测
-            log.error("【取消订单】: 更新失败 orderMaster={}" ,orderMaster);
+            log.error("【取消订单】: 订单更新失败 orderMaster={}" ,orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
 
@@ -172,7 +185,7 @@ public class OrderServiceImpl implements OrderService {
 
         //如果已经支付需要退款
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
-            //todo
+            payService.refund(orderDTO);
         }
         return orderDTO;
     }
@@ -221,7 +234,6 @@ public class OrderServiceImpl implements OrderService {
             log.error("【订单支付】: 更新失败 orderMaster={}" ,orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
-
         return orderDTO;
     }
 }

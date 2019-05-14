@@ -60,24 +60,28 @@ server:
 #  mpAppSecret: 8d8c86bd7aafa56bbd30c65b5c093417
 
 #微信公众号测试账号
-#wechat:
-#  mpAppId: wx6ba6afb880210b8f
-#  mpAppSecret: 41338b71706a08b2da62de50ad95e6a6
-#  mchId: 123
-#  mchKey: 456
-#  keyPath: var/weixin/h5.p12
-#  notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
+wechat:
+  #----授权-----
+  mpAppId: wx6ba6afb880210b8f
+  mpAppSecret: 41338b71706a08b2da62de50ad95e6a6
+  #----授权-----
+  #----支付-----
+  mchId: 123
+  mchKey: 456
+  notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
+  #----支付-----
+  #----退款-----
+  keyPath: var/weixin/h5.p12
+  #----退款-----
 
 
 #  师兄干货的
-wechat:
-  #  mpAppId: wxd898fcb01713c658
-  #  mpAppSecret: ed8bcd6a5acb51382cb967f1cf19ac89
-  mpAppId: wxe007de634e454627
-  mpAppSecret: ed8bcd6a5acb51382cb967f1cf19ac89
-  openAppId: wxd898fcb01713c658
-  openAppSecret: wxd898fcb01713c658
-  mchId: 1483469312
-  mchKey: C5245D70627C1F8E9964D494B0735025
-  keyPath:  F:/h5.p12 #文件路径
-  notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
+#wechat:
+#  mpAppId: wxe007de634e454627
+#  mpAppSecret: ed8bcd6a5acb51382cb967f1cf19ac89
+#  openAppId: wxd898fcb01713c658
+#  openAppSecret: wxd898fcb01713c658
+#  mchId: 1483469312
+#  mchKey: C5245D70627C1F8E9964D494B0735025
+#  keyPath:  F:/h5.p12 #r商户证书文件路径 用于退款
+#  notifyUrl: http://szjz.natapp1.cc/sell/pay/notify

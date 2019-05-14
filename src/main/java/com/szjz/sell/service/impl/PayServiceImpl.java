@@ -3,6 +3,8 @@ package com.szjz.sell.service.impl;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
+import com.lly835.bestpay.model.RefundRequest;
+import com.lly835.bestpay.model.RefundResponse;
 import com.lly835.bestpay.service.impl.BestPayServiceImpl;
 import com.szjz.sell.dto.OrderDTO;
 import com.szjz.sell.enums.ResultEnum;
@@ -16,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+
+import static com.lly835.bestpay.enums.BestPayTypeEnum.WXPAY_H5;
 
 /**
  * @author szjz
@@ -41,7 +45,7 @@ public class PayServiceImpl implements PayService {
         payRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
         payRequest.setOrderId(orderDTO.getOrderId());
         payRequest.setOrderName(PAY_NAME);
-        payRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
+        payRequest.setPayTypeEnum(WXPAY_H5);
         log.info("【微信支付】 请求支付 payRequest={}", JsonUtil.toJson(payRequest));
 
         PayResponse payResponse = bestPayService.pay(payRequest);
@@ -83,5 +87,26 @@ public class PayServiceImpl implements PayService {
         //修改订单的支付状态
         orderService.paidOrder(orderDTO);
         return payResponse;
+    }
+
+    /**
+     * 退款   利用sdk 只传递以下三个参数
+     *   "payTypeEnum": "WXPAY_H5",
+     *   "orderId": "123",
+     *   "orderAmount": 30.0
+     * @param orderDTO
+     * @return
+     */
+    @Override
+    public RefundResponse refund(OrderDTO orderDTO) {
+        RefundRequest refundRequest = new RefundRequest();
+        refundRequest.setOrderId(orderDTO.getOrderId());
+        refundRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
+        refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
+        log.info("【微信退款】 退款请求 refundRequest={}",JsonUtil.toJson(refundRequest));
+
+        RefundResponse refundResponse = bestPayService.refund(refundRequest);
+        log.info("【微信退款】 退款响应 refundResponse={}",JsonUtil.toJson(refundResponse));
+        return refundResponse;
     }
 }

@@ -1,8 +1,13 @@
 package com.szjz.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.szjz.sell.dataobject.OrderDetail;
 import com.szjz.sell.dataobject.OrderMaster;
+import com.szjz.sell.enums.CodeEnum;
+import com.szjz.sell.enums.OrderStatusEnum;
+import com.szjz.sell.enums.PayStatusEnum;
+import com.szjz.sell.utils.EnumUtil;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -45,5 +50,14 @@ public class OrderDTO extends OrderMaster {
 
     /** 添加订单详情列表 */
     private List<OrderDetail> orderDetailList;
+
+    @JsonIgnore  //json 转对象就会忽略掉带这个注解的属性
+    public OrderStatusEnum getOrderStatusEnum(Integer code){
+        return  EnumUtil.getByCode(code, OrderStatusEnum.class);
+    }
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum(Integer code){
+        return EnumUtil.getByCode(code, PayStatusEnum.class);
+    }
 
 }

@@ -3,6 +3,7 @@ package com.szjz.sell.controller;
 import com.szjz.sell.enums.ResultEnum;
 import com.szjz.sell.exception.SellException;
 import com.szjz.sell.resultObject.ResultObject;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
@@ -34,34 +35,42 @@ public class WechatController {
     @Autowired
     private WxMpService wxMpService;
 
+    /**
+     * 微信授权过程：先判断前端请求的时候cookies是否有携带openID
+     * 如果没有会跳转到前端配置的openidUrl 对应的请求路径
+     * 就是以下方法对应的授权路径 从而获取openid
+     * @param returnUrl
+     * @return
+     */
     @RequestMapping(value = "/authorize", method = RequestMethod.GET)
     @ApiOperation(value = "微信授权", notes = "最终的目的是为了获取用户的openID", response = ResultObject.class)
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
         //配置
         //调用方法
-        log.info("【微信网页授权】 开始授权，，，returnUrl={}",returnUrl);
+        log.info("【微信网页授权】 开始授权 returnUrl={}",returnUrl);
         String url = "http://szjz.natapp1.cc/sell/wechat/userInfo";
         url = URLEncoder.DEFAULT.encode(url, Charset.forName("utf-8"));
         String encodeUrl = URLEncoder.DEFAULT.encode(returnUrl, Charset.forName("utf-8"));
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, encodeUrl);
+        log.info("【微信网页授权】 正在授权 redirectUrl={}",redirectUrl);
         return "redirect:"+ redirectUrl;
     }
 
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+    @ApiOperation(value = "此方法是微信授权跳转的方法 不用单独测试")
     public String  userInfo(@RequestParam("code") String code,
                          @RequestParam("state") String returnUrl){
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
         try{
             wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+            log.info("【微信网页授权】 正在授权 code={}",code);
         }catch (WxErrorException e){
             e.printStackTrace();
-            log.error("【微信网页授权】 {}",e);
+            log.error("【微信网页授权】 异常exception={}",e);
             throw new SellException(ResultEnum.WX_MP_ERROR.getCode(), e.getError().getErrorMsg());
         }
         String openId = wxMpOAuth2AccessToken.getOpenId();
-        log.info("【微信网页授权】 成功！openid={}",openId);
+        log.info("【微信网页授权】 成功授权 openid={}",openId);
         return "redirect:"+returnUrl + "?openid=" + openId;
     }
-
-
 }
