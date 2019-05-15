@@ -7,6 +7,7 @@ import com.szjz.sell.enums.ResultEnum;
 import com.szjz.sell.exception.SellException;
 import com.szjz.sell.repository.ProductInfoRepository;
 import com.szjz.sell.service.ProductInfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import java.util.List;
  * @date 2019/5/8 10:09
  */
 @Service
+@Slf4j
 public class ProductInfoServiceImpl implements ProductInfoService {
 
 
@@ -78,5 +80,39 @@ public class ProductInfoServiceImpl implements ProductInfoService {
             productInfo.setProductStock(number);
             productInfoRepository.save(productInfo);
         }
+    }
+
+    @Override
+    public ProductInfo offSale(String productId) {
+        ProductInfo productInfo = productInfoRepository.findById(productId).orElse(null);
+        //先判断商品是否存在
+        if(productInfo == null){
+            log.error("【商品下架】 {}",ResultEnum.PRODUCT_NOT_EXIST.getMessage());
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        //再判断商品的状态
+        if(productInfo.getProductStatusEnum().getMessage()=="下架"){
+            log.error("【商品下架】 {}",ResultEnum.PRODUCT_STATUS_ERROR.getMessage());
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        return productInfoRepository.save(productInfo);
+    }
+
+    @Override
+    public ProductInfo onSale(String productId) {
+        ProductInfo productInfo = productInfoRepository.findById(productId).orElse(null);
+        //先判断商品是否存在
+        if(productInfo == null){
+            log.error("【商品上架】 {}",ResultEnum.PRODUCT_NOT_EXIST.getMessage());
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        //再判断商品的状态
+        if(productInfo.getProductStatusEnum().getMessage()=="上架"){
+            log.error("【商品上架】 {}",ResultEnum.PRODUCT_STATUS_ERROR.getMessage());
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+        return productInfoRepository.save(productInfo);
     }
 }

@@ -35,6 +35,9 @@ public class WechatController {
     @Autowired
     private WxMpService wxMpService;
 
+    @Autowired
+    private WxMpService wxOpenService;
+
     /**
      * 微信授权过程：先判断前端请求的时候cookies是否有携带openID
      * 如果没有会跳转到前端配置的openidUrl 对应的请求路径
@@ -73,4 +76,20 @@ public class WechatController {
         log.info("【微信网页授权】 成功授权 openid={}",openId);
         return "redirect:"+returnUrl + "?openid=" + openId;
     }
+
+
+    @RequestMapping(value = "/qrAuthorize", method = RequestMethod.GET)
+    @ApiOperation(value = "微信开放平台授权", notes = "最终的目的是为了获取用户的openID", response = ResultObject.class)
+    public String qrAuthorize(@RequestParam("returnUrl") String returnUrl) {
+        //配置
+        //调用方法
+        log.info("【微信开放平台授权】 开始授权 returnUrl={}",returnUrl);
+        String url = "http://szjz.natapp1.cc/sell/wechat/qrUserInfo";
+        url = URLEncoder.DEFAULT.encode(url, Charset.forName("utf-8"));
+        String encodeUrl = URLEncoder.DEFAULT.encode(returnUrl, Charset.forName("utf-8"));
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, encodeUrl);
+        log.info("【微信开放平台授权】 正在授权 redirectUrl={}",redirectUrl);
+        return "redirect:"+ redirectUrl;
+    }
+
 }

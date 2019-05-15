@@ -3,6 +3,7 @@ package com.szjz.sell.service.impl;
 import com.szjz.sell.dataobject.ProductInfo;
 import com.szjz.sell.enums.ProductStatusEnum;
 import com.szjz.sell.repository.ProductInfoRepository;
+import com.szjz.sell.service.ProductInfoService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,9 @@ public class ProductInfoServiceImplTest {
 
     @Autowired
     private ProductInfoRepository repository;
+
+    @Autowired
+    private ProductInfoService productInfoService;
 
     @Test
     public void findById() {
@@ -70,5 +74,18 @@ public class ProductInfoServiceImplTest {
     public void findUpAll() {
     }
 
+    @Test
+    public void onSale(){
+        ProductInfo productInfo = repository.findById("123").orElse(null);
+        productInfo = productInfoService.onSale(productInfo.getProductId());
+        System.err.println(productInfo);
+    }
+
+    @Test
+    public void offSale(){
+        ProductInfo productInfo = repository.findById("123").orElse(null);
+        productInfo = productInfoService.offSale(productInfo.getProductId());
+        System.err.println(productInfo);
+    }
 
 }

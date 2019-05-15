@@ -61,11 +61,16 @@ server:
 
 #微信公众号测试账号
 wechat:
-  #----授权-----
+  #----微信公众号授权-----
   mpAppId: wx6ba6afb880210b8f
   mpAppSecret: 41338b71706a08b2da62de50ad95e6a6
-  #----授权-----
-  #----支付-----
+  #----微信公众号授权-----
+
+  #----开放平台id-----
+  openAppId: wx6ba6afbXXXX
+  openAppSecret: 41338b71706a08b2da62de50ad95xxxx
+  #----开放平台id-----
+
   mchId: 123
   mchKey: 456
   notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
@@ -85,3 +90,8 @@ wechat:
 #  mchKey: C5245D70627C1F8E9964D494B0735025
 #  keyPath:  F:/h5.p12 #r商户证书文件路径 用于退款
 #  notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
+
+projectUrl:
+  wechatMpAuthorize:
+  wechatOpenAuthorize:
+  sell:

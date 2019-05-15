@@ -59,6 +59,9 @@ https://pay.weixin.qq.com/wiki
 第三方SDK:
 https://github.com/Pay-Group/best-pay-sdk  
 
+* 微信开放平台  
+https://open.weixin.qq.com/  
+
 测试，，
 
 
@@ -120,4 +123,14 @@ create table `order_detail` (
 	primary key (`detail_id`),
 	key `idx_order_id` (`order_id`) comment '索引'
  )comment '订单详情表';
+ 
+ CREATE TABLE `seller_info` (
+   `seller_id` varchar(32) NOT NULL,
+   `username` varchar(32) NOT NULL,
+   `password` varchar(32) NOT NULL,
+   `openid` varchar(64) NOT NULL COMMENT '微信openID',
+   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+   PRIMARY KEY (`seller_id`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='卖家信息表';
  ```

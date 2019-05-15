@@ -1,10 +1,16 @@
 package com.szjz.sell.dataobject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.szjz.sell.enums.ProductStatusEnum;
+import com.szjz.sell.utils.EnumUtil;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author szjz
@@ -12,12 +18,14 @@ import java.math.BigDecimal;
  */
 @Entity
 @Data
+@DynamicUpdate
 public class ProductInfo {
 
     @Id
     private String productId;
 
     /** 名称 */
+    @Column(nullable = false)
     private String ProductName;
 
     /**单价*/
@@ -32,12 +40,20 @@ public class ProductInfo {
     /**小图*/
     private String productIcon;
 
-    /**状态 0正常 1 下架*/
-    private Integer productStatus;
+    /**状态 0 上架 1 下架 默认为上架*/
+    private Integer productStatus = ProductStatusEnum.UP.getCode();
     
     /** 类目编号 */
     private Integer categoryType;
 
+    /** 创建时间 */
+    private Date createTime;
 
+    /** 修改时间 */
+    private Date updateTime;
 
+    @JsonIgnore
+    public ProductStatusEnum getProductStatusEnum(){
+        return EnumUtil.getByCode(productStatus ,ProductStatusEnum.class);
+    }
 }

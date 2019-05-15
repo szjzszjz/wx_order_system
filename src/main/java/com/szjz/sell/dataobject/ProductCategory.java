@@ -14,6 +14,7 @@ import java.util.Date;
 //@Table(name = "product_category") 默认生成对应表
 //@DynamicUpdate //动态更新  主要用于对修改时间的更新 updateTime
 @Data
+@DynamicUpdate
 public class ProductCategory {
 
     /**
@@ -33,6 +34,12 @@ public class ProductCategory {
      */
     private Integer categoryType;
 
+    /** 创建时间 */
+    private Date createTime;
+
+    /** 修改时间 */
+    private Date updateTime;
+
     public ProductCategory() {
     }
 
@@ -41,5 +48,4 @@ public class ProductCategory {
         this.categoryType = categoryType;
     }
 
-    //private Date updateTime;
 }

@@ -27,7 +27,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/seller/order")
 @Slf4j
-public class SellOrderController {
+public class SellerOrderController {
 
 
     @Autowired
@@ -46,7 +46,7 @@ public class SellOrderController {
                              @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
         Map<String, Object> map = new HashMap<>();
         //默认从第零页开始查
-        PageRequest pageRequest = PageRequest.of(pageNum, pageSize);
+        PageRequest pageRequest = PageRequest.of(pageNum - 1, pageSize);
         Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
         map.put("orderDTOPage", orderDTOPage);
         map.put("currentPage", pageNum);
@@ -107,7 +107,7 @@ public class SellOrderController {
             e.printStackTrace();
             map.put("msg", e.getMessage());
             map.put("url", "/sell/seller/order/list");
-            return new ModelAndView("order/error", map);
+            return new ModelAndView("common/error", map);
         }
 
         map.put("orderDTO",orderDTO);

@@ -52,12 +52,12 @@ public class OrderDTO extends OrderMaster {
     private List<OrderDetail> orderDetailList;
 
     @JsonIgnore  //json 转对象就会忽略掉带这个注解的属性
-    public OrderStatusEnum getOrderStatusEnum(Integer code){
-        return  EnumUtil.getByCode(code, OrderStatusEnum.class);
+    public OrderStatusEnum getOrderStatusEnum(){
+        return  EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
     }
     @JsonIgnore
-    public PayStatusEnum getPayStatusEnum(Integer code){
-        return EnumUtil.getByCode(code, PayStatusEnum.class);
+    public PayStatusEnum getPayStatusEnum(){
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
     }
 
 }

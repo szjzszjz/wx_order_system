@@ -4,6 +4,8 @@ import com.szjz.sell.dataobject.ProductCategory;
 import com.szjz.sell.repository.ProductCategoryRepository;
 import com.szjz.sell.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,11 @@ public class ProductCategoryServiceImpl  implements ProductCategoryService{
     public ProductCategory findById(Integer categoryId) {
         ProductCategory productCategory = repository.findById(categoryId).orElse(null);
         return productCategory;
+    }
+    //分页查询
+    @Override
+    public Page<ProductCategory> findAll(Pageable pageable) {
+        return  repository.findAll(pageable);
     }
 
     @Override
