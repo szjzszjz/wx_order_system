@@ -3,6 +3,7 @@ package com.szjz.sell.controller;
 import com.lly835.bestpay.rest.type.Get;
 import com.lly835.bestpay.rest.type.Post;
 import com.szjz.sell.dataobject.ProductCategory;
+import com.szjz.sell.enums.ResultEnum;
 import com.szjz.sell.service.ProductCategoryService;
 import com.szjz.sell.utils.KeyUtil;
 import io.swagger.annotations.ApiOperation;
@@ -75,7 +76,16 @@ public class SellerCategoryController {
         productCategory.setCategoryName(categoryName);
         productCategory.setCategoryType(categoryType);
 
-        productCategoryService.save(productCategory);
+//        因为categoryType作为索引具有唯一性，所有修改的时候可能会重复，此时保存数据就会出异常
+        try{
+            productCategoryService.save(productCategory);
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error("【保存/更新类目】 {}", ResultEnum.INDEX_IS_REPEAT.getMessage());
+            map.put("msg",ResultEnum.INDEX_IS_REPEAT.getMessage()+","+"修改失败！");
+            map.put("url","/sell/seller/category/list");
+            return new ModelAndView("common/error",map);
+        }
 
         map.put("url","/sell/seller/category/list");
         return new ModelAndView("common/success",map);

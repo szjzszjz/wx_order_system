@@ -33,10 +33,8 @@ import java.nio.charset.Charset;
 public class WechatController {
 
     @Autowired
-    private WxMpService wxMpService;
+    private WxMpService wxMpService ;
 
-    @Autowired
-    private WxMpService wxOpenService;
 
     /**
      * 微信授权过程：先判断前端请求的时候cookies是否有携带openID

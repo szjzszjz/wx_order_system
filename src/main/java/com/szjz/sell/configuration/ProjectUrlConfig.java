@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "projectUrl")
+@ConfigurationProperties(prefix = "project-url")
 public class ProjectUrlConfig {
 
     /** 微信公众平台授权url */

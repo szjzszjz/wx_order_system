@@ -63,12 +63,10 @@ public class SellerProductController {
             productInfoService.offSale(productId);
         } catch (SellException e) {
             e.printStackTrace();
-            map.put("title", e.getMessage());
             map.put("msg", e.getMessage());
             map.put("url", "/sell/seller/product/list");
             return new ModelAndView("common/error", map);
         }
-        map.put("title", "下架成功");
         map.put("msg", "成功");
         map.put("url", "/sell/seller/product/list");
         return new ModelAndView("common/success", map);
@@ -88,7 +86,6 @@ public class SellerProductController {
             map.put("url", "/sell/seller/product/list");
             return new ModelAndView("common/error", map);
         }
-        map.put("title", "上架成功");
         map.put("msg", "成功");
         map.put("url", "/sell/seller/product/list");
         return new ModelAndView("common/success", map);

@@ -30,6 +30,7 @@ public enum ResultEnum {
 
     CAR_IS_EMPTY(120,"购物车为空"),
     RESULT_IS_EMPTY(121,"查询结果为空"),
+    INDEX_IS_REPEAT(122,"索引建重复")
 
     ;
 

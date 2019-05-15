@@ -1,10 +1,11 @@
 spring:
   datasource:
-    username: root
-    password: 123456
-    url: jdbc:mysql://192.168.1.151/sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
     driver-class-name: com.mysql.jdbc.Driver
-
+    username: root
+#    password: 123456
+#    url: jdbc:mysql://1root92.168.1.151/sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
+    password: root
+    url: jdbc:mysql:///sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
   jpa:
     show-sql: true
 
@@ -92,6 +93,6 @@ wechat:
 #  notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
 
 projectUrl:
-  wechatMpAuthorize:
-  wechatOpenAuthorize:
-  sell:
+  wechatMpAuthorize: http://szjz.natapp1.cc
+  wechatOpenAuthorize: http://szjz.natapp1.cc
+  sell: http://szjz.natapp1.cc
