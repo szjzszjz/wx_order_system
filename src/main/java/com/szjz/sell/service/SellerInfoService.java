@@ -9,4 +9,6 @@ import com.szjz.sell.dataobject.SellerInfo;
 public interface SellerInfoService {
 
     SellerInfo findSellerInfoByOpenid(String openid);
+
+    SellerInfo findByUsernameAndPassword(String username ,String password);
 }

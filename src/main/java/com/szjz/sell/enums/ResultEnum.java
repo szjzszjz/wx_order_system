@@ -30,8 +30,11 @@ public enum ResultEnum {
 
     CAR_IS_EMPTY(120,"购物车为空"),
     RESULT_IS_EMPTY(121,"查询结果为空"),
-    INDEX_IS_REPEAT(122,"索引建重复")
+    INDEX_IS_REPEAT(122,"索引键重复"),
 
+    LOGIN_ERROR_USER_NOT_EXIST(130,"登录异常用户不存在"),
+    LOGOUT_SUCCESS(131,"退出成功"),
+    LOGOUTED(132,"已经退出")
     ;
 
     private Integer code;

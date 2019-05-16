@@ -1,8 +1,10 @@
 package com.szjz.sell.controller;
 
+import com.szjz.sell.configuration.ProjectUrlConfig;
 import com.szjz.sell.enums.ResultEnum;
 import com.szjz.sell.exception.SellException;
 import com.szjz.sell.resultObject.ResultObject;
+import com.szjz.sell.utils.URLEncoderUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +37,7 @@ public class WechatController {
     @Autowired
     private WxMpService wxMpService ;
 
+    private ProjectUrlConfig projectUrlConfig;
 
     /**
      * 微信授权过程：先判断前端请求的时候cookies是否有携带openID
@@ -44,15 +47,15 @@ public class WechatController {
      * @return
      */
     @RequestMapping(value = "/authorize", method = RequestMethod.GET)
-    @ApiOperation(value = "微信授权", notes = "最终的目的是为了获取用户的openID", response = ResultObject.class)
+    @ApiOperation(value = "微信网页授权", notes = "最终的目的是为了获取用户的openID", response = ResultObject.class)
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
         //配置
         //调用方法
         log.info("【微信网页授权】 开始授权 returnUrl={}",returnUrl);
-        String url = "http://szjz.natapp1.cc/sell/wechat/userInfo";
-        url = URLEncoder.DEFAULT.encode(url, Charset.forName("utf-8"));
-        String encodeUrl = URLEncoder.DEFAULT.encode(returnUrl, Charset.forName("utf-8"));
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, encodeUrl);
+        String url = projectUrlConfig.getWechatMpAuthorize() + "/sell/wechat/userInfo";
+        url = URLEncoderUtil.encoderUTF8(url);
+        returnUrl = URLEncoderUtil.encoderUTF8(returnUrl);
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, returnUrl);
         log.info("【微信网页授权】 正在授权 redirectUrl={}",redirectUrl);
         return "redirect:"+ redirectUrl;
     }
@@ -76,18 +79,41 @@ public class WechatController {
     }
 
 
+    /**
+     * 二维码扫码登录
+     * 授权
+     * @param returnUrl
+     * @return
+     */
     @RequestMapping(value = "/qrAuthorize", method = RequestMethod.GET)
     @ApiOperation(value = "微信开放平台授权", notes = "最终的目的是为了获取用户的openID", response = ResultObject.class)
     public String qrAuthorize(@RequestParam("returnUrl") String returnUrl) {
         //配置
         //调用方法
         log.info("【微信开放平台授权】 开始授权 returnUrl={}",returnUrl);
-        String url = "http://szjz.natapp1.cc/sell/wechat/qrUserInfo";
-        url = URLEncoder.DEFAULT.encode(url, Charset.forName("utf-8"));
-        String encodeUrl = URLEncoder.DEFAULT.encode(returnUrl, Charset.forName("utf-8"));
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, encodeUrl);
+        String url = projectUrlConfig.getWechatOpenAuthorize() + "/sell/wechat/qrUserInfo";
+        url = URLEncoderUtil.encoderUTF8(url);
+        returnUrl = URLEncoderUtil.encoderUTF8(returnUrl);
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.QrConnectScope.SNSAPI_LOGIN, returnUrl);
         log.info("【微信开放平台授权】 正在授权 redirectUrl={}",redirectUrl);
         return "redirect:"+ redirectUrl;
     }
 
+    @RequestMapping(value = "/qrUserInfo", method = RequestMethod.GET)
+    @ApiOperation(value = "此方法是微信开放平台二维码授权跳转的方法 不用单独测试")
+    public String  qrUserInfo(@RequestParam("code") String code,
+                            @RequestParam("state") String returnUrl){
+        WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
+        try{
+            wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+            log.info("【微信开放平台授权】 正在授权 code={}",code);
+        }catch (WxErrorException e){
+            e.printStackTrace();
+            log.error("【微信开放平台授权】 异常exception={}",e);
+            throw new SellException(ResultEnum.WX_MP_ERROR.getCode(), e.getError().getErrorMsg());
+        }
+        String openId = wxMpOAuth2AccessToken.getOpenId();
+        log.info("【微信开放平台授权】 成功授权 openid={}",openId);
+        return "redirect:"+returnUrl + "?openid=" + openId;
+    }
 }

@@ -92,7 +92,7 @@ public class SellerProductController {
     }
 
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
     @ApiOperation(value = "展示商品详情/填写新增的商品信息" , notes = "有productId 展示商品信息，无productId 填写商品信息")
     public ModelAndView index(@RequestParam(required = false) String productId) {
         Map<String, Object> map = new HashMap<>();

@@ -8,7 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -45,4 +48,44 @@ public class OrderDetailRepositoryTest {
         System.err.println(list);
     }
 
+    @Test
+    public void get1() {
+
+        ArrayList<Integer> cookies = new ArrayList<>();
+        for (int i = 0; i <100000; i++) {
+            cookies.add(i);
+        }
+
+        long startMillis1 = System.currentTimeMillis();
+        for (int integer : cookies) {
+            if (integer==99999) {
+                System.err.println("yes");
+            }
+        }
+        System.err.println("用for循环遍历耗时0：" + (System.currentTimeMillis() - startMillis1) + "ms");
+    }
+
+    @Test
+    public void getTest1() {
+        Map<String, Object> map = new HashMap<>();
+        ArrayList<Integer> cookies = new ArrayList<>();
+
+        for (int i = 0; i <100000; i++) {
+            cookies.add(i);
+        }
+
+        long startMillis1 = System.currentTimeMillis();
+        if(cookies != null){
+            for (int integer : cookies) {
+                map.put(String.valueOf(integer), integer);
+            }
+        }
+
+        if(map.containsKey(String.valueOf(99999))){
+            System.err.println("yes");
+        }else {
+            System.err.println("no");
+        }
+        System.err.println("用for循环遍历耗时1：" + (System.currentTimeMillis() - startMillis1) + "ms");
+    }
 }

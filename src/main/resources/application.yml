@@ -1,13 +1,17 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
     username: root
-#    password: 123456
-#    url: jdbc:mysql://1root92.168.1.151/sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
-    password: root
-    url: jdbc:mysql:///sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
+    password: 123456
+    url: jdbc:mysql://192.168.1.151/sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #    password: root
+#    url: jdbc:mysql:///sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
   jpa:
     show-sql: true
+
+  redis:
+    host: 192.168.1.151
+    port: 6379
 
   #thymeleaf 模板引擎  默认一般不用配置
 #  thymeleaf:
@@ -24,6 +28,7 @@ spring:
 
 
   #freemarker 模板引擎 默认一般不用配置
+
 #  freemarker:
 #    template-loader-path: classpath:/templates/  #设定ftl文件路径
 #    cache: false #测试环境下及时刷新页面 上线环境需要改为true
@@ -72,10 +77,12 @@ wechat:
   openAppSecret: 41338b71706a08b2da62de50ad95xxxx
   #----开放平台id-----
 
+  #----支付-----
   mchId: 123
   mchKey: 456
   notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
   #----支付-----
+
   #----退款-----
   keyPath: var/weixin/h5.p12
   #----退款-----
