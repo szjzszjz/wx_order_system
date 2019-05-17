@@ -23,7 +23,7 @@ public interface ProductInfoService {
 
     List<ProductInfo> findByProductStatus(Integer integer);
 
-    void save(ProductInfo productInfo);
+    ProductInfo save(ProductInfo productInfo);
 
     /** 加库存 */
     void increaseStock(List<CarDTO> carDTOList);

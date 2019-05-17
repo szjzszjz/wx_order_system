@@ -65,5 +65,8 @@
         </div>
     </div>
 </div>
+
+
+<#include "../common/websocket.ftl">
 </body>
 </html>

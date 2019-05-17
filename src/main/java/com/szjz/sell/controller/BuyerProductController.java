@@ -11,6 +11,7 @@ import com.szjz.sell.utils.ResultObjectUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +38,7 @@ public class BuyerProductController {
 
     @GetMapping(value = "/list")
     @ApiOperation(value = "查询所有商品", notes = "", response = ResultObject.class)
+    @Cacheable(cacheNames = "product",key="123")  //实现Redis缓存
     public ResultObject getList() {
 
         /** 查询所有的商品 */

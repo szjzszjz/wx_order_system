@@ -14,9 +14,7 @@ import com.szjz.sell.exception.SellException;
 import com.szjz.sell.repository.OrderDetailRepository;
 import com.szjz.sell.repository.OrderMasterRepository;
 import com.szjz.sell.repository.ProductInfoRepository;
-import com.szjz.sell.service.OrderService;
-import com.szjz.sell.service.PayService;
-import com.szjz.sell.service.ProductInfoService;
+import com.szjz.sell.service.*;
 import com.szjz.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -55,6 +53,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private PayService payService;
+
+    @Autowired
+    private WXPushMessageService pushMessageService;
+
+    @Autowired
+    private WebSocket webSocket;
 
     @Override
     @Transactional //一旦发生异常回退 不扣除库存
@@ -101,6 +105,9 @@ public class OrderServiceImpl implements OrderService {
                 new CarDTO(e.getProductId(), e.getProductQuantity())
         ).collect(Collectors.toList());
         productInfoService.decreaseStock(carDTOList);
+
+        //用户下单成功调用websocket消息推送
+        webSocket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;
     }
@@ -207,6 +214,11 @@ public class OrderServiceImpl implements OrderService {
             log.error("【完结订单】: 更新失败 orderMaster={}" ,orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
+
+        //订单完结之后向客户关注的该微信公众号平台推送消息
+        //消息推送只打印错误日志 不向外抛出异常，如果抛出异常 完结订单事务会回滚，影响业务流程。
+        //消息推送作为附加功能如果有 更好 如果出现异常，打印日志就行了
+        pushMessageService.orderStatus(orderDTO);
         return orderDTO;
     }
 

@@ -13,6 +13,7 @@ import io.swagger.models.auth.In;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -77,7 +78,6 @@ public class SellerProductController {
     public ModelAndView onSale(@RequestParam String productId) {
         Map<String, Object> map = new HashMap<>();
         try {
-            System.err.println("-------------");
             productInfoService.onSale(productId);
         } catch (SellException e) {
             e.printStackTrace();

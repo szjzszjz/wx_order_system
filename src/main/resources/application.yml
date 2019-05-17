@@ -42,8 +42,6 @@ spring:
 
 
 
-#  mvc:
-#    static-path-pattern: /img/img.jpg (thyemleaf依赖替代)
 
 #  jackson:
 #    default-property-inclusion: non_null #全局配置 若返回字段为null 则不返回给前端
@@ -86,6 +84,13 @@ wechat:
   #----退款-----
   keyPath: var/weixin/h5.p12
   #----退款-----
+  #----模板消息推送-----
+  templateIdMap:
+    orderStatus: ujQwNIQw6PtJjOMG1ue5DDqgq0xxDfzHo0S6uE74ZLY  #订单状态模板ID
+  #----模板消息推送-----
+
+
+
 
 
 #  师兄干货的
@@ -99,7 +104,7 @@ wechat:
 #  keyPath:  F:/h5.p12 #r商户证书文件路径 用于退款
 #  notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
 
-projectUrl:
+project-url:
   wechatMpAuthorize: http://szjz.natapp1.cc
   wechatOpenAuthorize: http://szjz.natapp1.cc
   sell: http://szjz.natapp1.cc

@@ -3,6 +3,8 @@ package com.szjz.sell.resultObject;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author szjz
  * @date 2019/5/8 11:47
@@ -11,8 +13,9 @@ import lombok.Data;
 
 
 @Data
-public class ResultObject<T> {
+public class ResultObject<T> implements Serializable {
 
+    private static final long serialVersionUID = 1578762596998649599L;
     /** 错误码 */
     private Integer code;
 

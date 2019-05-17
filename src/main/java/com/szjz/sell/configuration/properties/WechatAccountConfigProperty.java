@@ -1,8 +1,11 @@
-package com.szjz.sell.configuration;
+package com.szjz.sell.configuration.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * @author szjz
@@ -13,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "wechat")
-public class WechatAccountConfig {
+public class WechatAccountConfigProperty {
 
     /** 公众号开发者id */
     private String mpAppId;
@@ -38,5 +41,8 @@ public class WechatAccountConfig {
 
     /** 微信支付异步通知地址 */
     private String notifyUrl;
+
+    /** 消息推送的模板id */
+    private Map<String ,String > templateIdMap;
 
 }

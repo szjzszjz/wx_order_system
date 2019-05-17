@@ -1,6 +1,6 @@
 package com.szjz.sell.handler;
 
-import com.szjz.sell.configuration.ProjectUrlConfig;
+import com.szjz.sell.configuration.properties.ProjectUrlCofigProperty;
 import com.szjz.sell.exception.SellException;
 import com.szjz.sell.exception.SellerAuthorizeException;
 import com.szjz.sell.resultObject.ResultObject;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.jws.WebParam;
 
 /**
  * 统一异常拦截处理  使返回前端的json格式统一
@@ -31,7 +29,7 @@ import javax.jws.WebParam;
 public class MyExceptionHandler {
 
     @Autowired
-    private ProjectUrlConfig urlConfig;
+    private ProjectUrlCofigProperty urlConfig;
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody

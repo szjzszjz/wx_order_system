@@ -2,6 +2,7 @@ package com.szjz.sell.configuration;
 
 import com.lly835.bestpay.config.WxPayH5Config;
 import com.lly835.bestpay.service.impl.BestPayServiceImpl;
+import com.szjz.sell.configuration.properties.WechatAccountConfigProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class WechatPayConfig {
 
     @Autowired
-    private WechatAccountConfig wechatAccountConfig;
+    private WechatAccountConfigProperty wechatAccountConfigProperty;
 
     @Bean
     public BestPayServiceImpl bestPayService(){
@@ -29,12 +30,12 @@ public class WechatPayConfig {
     @Bean
     public WxPayH5Config wxPayH5Config(){
         WxPayH5Config wxPayH5Config = new WxPayH5Config();
-        wxPayH5Config.setAppId(wechatAccountConfig.getMpAppId());
-        wxPayH5Config.setAppSecret(wechatAccountConfig.getMpAppSecret());
-        wxPayH5Config.setMchId(wechatAccountConfig.getMchId());
-        wxPayH5Config.setMchKey(wechatAccountConfig.getMchKey());
-        wxPayH5Config.setKeyPath(wechatAccountConfig.getKeyPath());
-        wxPayH5Config.setNotifyUrl(wechatAccountConfig.getNotifyUrl());
+        wxPayH5Config.setAppId(wechatAccountConfigProperty.getMpAppId());
+        wxPayH5Config.setAppSecret(wechatAccountConfigProperty.getMpAppSecret());
+        wxPayH5Config.setMchId(wechatAccountConfigProperty.getMchId());
+        wxPayH5Config.setMchKey(wechatAccountConfigProperty.getMchKey());
+        wxPayH5Config.setKeyPath(wechatAccountConfigProperty.getKeyPath());
+        wxPayH5Config.setNotifyUrl(wechatAccountConfigProperty.getNotifyUrl());
         return wxPayH5Config;
     }
 }

@@ -83,6 +83,8 @@
     </div>
 </div>
 
+<#--引入websocket-->
+<#include "../common/websocket.ftl">
 
 </body>
 </html>

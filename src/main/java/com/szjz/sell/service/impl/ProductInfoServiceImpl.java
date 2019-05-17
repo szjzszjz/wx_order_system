@@ -9,6 +9,7 @@ import com.szjz.sell.repository.ProductInfoRepository;
 import com.szjz.sell.service.ProductInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     private ProductInfoRepository productInfoRepository;
 
     @Override
+    @Cacheable(cacheNames = "product" ,key = "123")
     public ProductInfo findById(String id) {
         return productInfoRepository.findById(id).orElse(null);
     }
@@ -49,8 +51,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     }
 
     @Override
-    public void save(ProductInfo productInfo) {
-        productInfoRepository.save(productInfo);
+    @Cacheable(cacheNames = "product" ,key = "123")
+    public ProductInfo save(ProductInfo productInfo) {
+        return productInfoRepository.save(productInfo);
     }
 
     @Override

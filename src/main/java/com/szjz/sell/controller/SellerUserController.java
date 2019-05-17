@@ -1,6 +1,6 @@
 package com.szjz.sell.controller;
 
-import com.szjz.sell.configuration.ProjectUrlConfig;
+import com.szjz.sell.configuration.properties.ProjectUrlCofigProperty;
 import com.szjz.sell.constant.CookieConstant;
 import com.szjz.sell.constant.RedisConstant;
 import com.szjz.sell.dataobject.SellerInfo;
@@ -14,12 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.WebParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +44,7 @@ public class SellerUserController {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    private ProjectUrlConfig projectUrlConfig;
+    private ProjectUrlCofigProperty projectUrlCofigProperty;
 
     @GetMapping("/index")
     public ModelAndView index(){
@@ -90,7 +88,7 @@ public class SellerUserController {
         //3、设置token至客户端的cookis 每次登录就会携带上一次的服务器返回的token
         CookieUtil.set(response, CookieConstant.TOKEN,token,expire);
 
-        return new ModelAndView("redirect:" + projectUrlConfig.getSell() + "/sell/seller/order/list");
+        return new ModelAndView("redirect:" + projectUrlCofigProperty.getSell() + "/sell/seller/order/list");
     }
 
 

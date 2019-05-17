@@ -1,5 +1,7 @@
 package com.szjz.sell.configuration;
 
+import com.szjz.sell.configuration.properties.ProjectUrlCofigProperty;
+import com.szjz.sell.configuration.properties.WechatAccountConfigProperty;
 import me.chanjar.weixin.mp.api.WxMpConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -18,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 public class WechatMpConfig {
 
     @Autowired
-    private WechatAccountConfig wechatAccountConfig;
+    private WechatAccountConfigProperty wechatAccountConfigProperty;
 
     @Bean
     public WxMpService wxMpService(){
@@ -30,8 +32,8 @@ public class WechatMpConfig {
     @Bean
     public WxMpConfigStorage wxMpConfigStorage(){
         WxMpInMemoryConfigStorage wxMpConfigStorage = new WxMpInMemoryConfigStorage();
-        wxMpConfigStorage.setAppId(wechatAccountConfig.getMpAppId());
-        wxMpConfigStorage.setSecret(wechatAccountConfig.getMpAppSecret());
+        wxMpConfigStorage.setAppId(wechatAccountConfigProperty.getMpAppId());
+        wxMpConfigStorage.setSecret(wechatAccountConfigProperty.getMpAppSecret());
         return wxMpConfigStorage;
     }
 }
