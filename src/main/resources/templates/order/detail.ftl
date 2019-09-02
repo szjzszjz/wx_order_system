@@ -58,8 +58,10 @@
             <#--        按鈕-->
             <div class="col-md-12 column">
                 <#if orderDTO.getOrderStatus() == 0>
-                    <a href="/sell/seller/order/finish?orderId=${orderDTO.getOrderId()}" type="button" class="btn btn-default btn-primary">完结订单</a>
-                    <a href="/sell/seller/order/cancel?orderId=${orderDTO.getOrderId()}" type="button" class="btn btn-default btn-danger">取消订单</a>
+                    <a href="/sell/seller/order/finish?orderId=${orderDTO.getOrderId()}" type="button"
+                       class="btn btn-default btn-primary">完结订单</a>
+                    <a href="/sell/seller/order/cancel?orderId=${orderDTO.getOrderId()}" type="button"
+                       class="btn btn-default btn-danger">取消订单</a>
                 </#if>
             </div>
         </div>

@@ -9,8 +9,10 @@ import java.util.List;
  * @author szjz
  * @date 2019/5/8 9:20
  */
-public interface ProductInfoRepository extends JpaRepository<ProductInfo,String> {
+public interface ProductInfoRepository extends JpaRepository<ProductInfo, String> {
 
-    /** 通过商品的状态查询商品 */
+    /**
+     * 通过商品的状态查询商品
+     */
     List<ProductInfo> findByProductStatus(Integer integer);
 }

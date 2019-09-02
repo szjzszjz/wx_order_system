@@ -24,7 +24,6 @@ import java.util.Map;
  * @author szjz
  * @date 2019/5/15 17:14
  * 卖家商品类目
- *
  */
 @Controller
 @Slf4j
@@ -38,8 +37,8 @@ public class SellerCategoryController {
     @ApiOperation(value = "商品类目列表")
     public ModelAndView list(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                              @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-        Map<String , Object> map = new HashMap<>();
-        PageRequest pageRequest = PageRequest.of(pageNum-1, pageSize);
+        Map<String, Object> map = new HashMap<>();
+        PageRequest pageRequest = PageRequest.of(pageNum - 1, pageSize);
         Page<ProductCategory> productCategoryPage = productCategoryService.findAll(pageRequest);
         map.put("productCategoryPage", productCategoryPage);
         map.put("currentPage", pageNum);
@@ -49,46 +48,46 @@ public class SellerCategoryController {
 
     @GetMapping(value = "/index")
     @ApiOperation(value = "展示类目的详情或者添加类目")
-    public ModelAndView index(@RequestParam(required = false) Integer categoryId){
-        Map<String , Object> map = new HashMap<>();
-        if(categoryId != null){
+    public ModelAndView index(@RequestParam(required = false) Integer categoryId) {
+        Map<String, Object> map = new HashMap<>();
+        if (categoryId != null) {
             ProductCategory productCategory = productCategoryService.findById(categoryId);
-            map.put("productCategory",productCategory);
+            map.put("productCategory", productCategory);
         }
-        return  new ModelAndView("category/index",map);
+        return new ModelAndView("category/index", map);
     }
 
     @PostMapping(value = "/save")
     @ApiOperation(value = "保存/更新类目")
     public ModelAndView saveOrUpdate(@RequestParam(required = false) Integer categoryId,
                                      @RequestParam String categoryName,
-                                     @RequestParam Integer categoryType){
-        Map<String , Object> map = new HashMap<>();
+                                     @RequestParam Integer categoryType) {
+        Map<String, Object> map = new HashMap<>();
         ProductCategory productCategory = new ProductCategory();
 
-        if(categoryId == null){
-           //id自增 由数据库管理
-            map.put("msg","添加类目成功");
-        }else {
+        if (categoryId == null) {
+            //id自增 由数据库管理
+            map.put("msg", "添加类目成功");
+        } else {
             productCategory = productCategoryService.findById(categoryId);
-            map.put("msg","修改类目成功");
+            map.put("msg", "修改类目成功");
         }
         productCategory.setCategoryName(categoryName);
         productCategory.setCategoryType(categoryType);
 
 //        因为categoryType作为索引具有唯一性，所有修改的时候可能会重复，此时保存数据就会出异常
-        try{
+        try {
             productCategoryService.save(productCategory);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             log.error("【保存/更新类目】 {}", ResultEnum.INDEX_IS_REPEAT.getMessage());
-            map.put("msg",ResultEnum.INDEX_IS_REPEAT.getMessage()+","+"修改失败！");
-            map.put("url","/sell/seller/category/list");
-            return new ModelAndView("common/error",map);
+            map.put("msg", ResultEnum.INDEX_IS_REPEAT.getMessage() + "," + "修改失败！");
+            map.put("url", "/sell/seller/category/list");
+            return new ModelAndView("common/error", map);
         }
 
-        map.put("url","/sell/seller/category/list");
-        return new ModelAndView("common/success",map);
+        map.put("url", "/sell/seller/category/list");
+        return new ModelAndView("common/success", map);
     }
 
 }

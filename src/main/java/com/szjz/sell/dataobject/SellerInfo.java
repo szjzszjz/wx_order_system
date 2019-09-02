@@ -17,16 +17,24 @@ public class SellerInfo implements Serializable {
 
 
     private static final long serialVersionUID = -4479586993810851715L;
-    /** 卖家id */
+    /**
+     * 卖家id
+     */
     @Id
     private String sellerId;
 
-    /** 用户名 */
+    /**
+     * 用户名
+     */
     private String username;
 
-    /** 密码 */
+    /**
+     * 密码
+     */
     private String password;
 
-    /** 微信openID */
+    /**
+     * 微信openID
+     */
     private String openid;
 }

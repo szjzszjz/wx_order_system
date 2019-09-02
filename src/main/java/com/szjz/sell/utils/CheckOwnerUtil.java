@@ -11,10 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CheckOwnerUtil {
 
-    public static Boolean check(String buyerOpenid, OrderDTO orderDTO){
-        if(buyerOpenid.equals(orderDTO.getBuyerOpenid())){
+    public static Boolean check(String buyerOpenid, OrderDTO orderDTO) {
+        if (buyerOpenid.equals(orderDTO.getBuyerOpenid())) {
             return true;
-        }else {
+        } else {
             log.error("【当前用户判断】 非系统当前登录用户");
             return false;
         }

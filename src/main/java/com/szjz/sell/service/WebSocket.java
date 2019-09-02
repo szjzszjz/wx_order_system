@@ -44,7 +44,7 @@ public class WebSocket {
 
     public void sendMessage(String message) {
         for (WebSocket websocket : webSockets) {
-            log.info("【websocket消息】 广播消息 message={}", message);
+            log.info("【websocket消息】 服务端广播消息 message={}", message);
             try {
                 websocket.session.getBasicRemote().sendText(message);
             } catch (Exception e) {

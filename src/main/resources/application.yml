@@ -1,30 +1,30 @@
 spring:
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://192.168.1.151/sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
+    password: root
+    #    url: jdbc:mysql:///sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
     driver-class-name: com.mysql.cj.jdbc.Driver
-  #    password: root
-#    url: jdbc:mysql:///sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
+    #    password: root
+    url: jdbc:mysql:///sell?characterEncoding=utf-8&useSSL=false&useTimezone=true
   jpa:
     show-sql: true
 
   redis:
-    host: 192.168.1.151
+    host: 127.0.0.1
     port: 6379
 
   #thymeleaf 模板引擎  默认一般不用配置
 #  thymeleaf:
-#    check-template-location: true
-#    servlet:
-#      content-type: text/html
-#    enabled: true
-#    encoding: UTF-8
-#    excluded-view-names: index
 #    prefix: classpath:/templates/
+#      check-template-location: true
+#      servlet:
+#        content-type: text/html
+#      enabled: true
+#      encoding: UTF-8
+#      excluded-view-names: index
 #    suffix: .html
-#    cache: false
-#    mode: HTML
+#      cache: false
+#      mode: HTML
 
 
   #freemarker 模板引擎 默认一般不用配置
@@ -49,6 +49,7 @@ spring:
 server:
   servlet:
     context-path: /sell
+  port: 8888
 
 #日志输出的格式
 #logging:
@@ -78,7 +79,7 @@ wechat:
   #----支付-----
   mchId: 123
   mchKey: 456
-  notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
+  notifyUrl: http://127.0.0.1:8888/sell/pay/notify
   #----支付-----
 
   #----退款-----
@@ -102,9 +103,9 @@ wechat:
 #  mchId: 1483469312
 #  mchKey: C5245D70627C1F8E9964D494B0735025
 #  keyPath:  F:/h5.p12 #r商户证书文件路径 用于退款
-#  notifyUrl: http://szjz.natapp1.cc/sell/pay/notify
+#  notifyUrl: http://127.0.0.1:8888/sell/pay/notify
 
 project-url:
-  wechatMpAuthorize: http://szjz.natapp1.cc
-  wechatOpenAuthorize: http://szjz.natapp1.cc
-  sell: http://szjz.natapp1.cc
+  wechatMpAuthorize: http://127.0.0.1:8888
+  wechatOpenAuthorize: http://127.0.0.1:8888
+  sell: http://127.0.0.1:8888

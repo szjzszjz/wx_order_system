@@ -92,8 +92,8 @@ public class SellerProductController {
     }
 
 
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
-    @ApiOperation(value = "展示商品详情/填写新增的商品信息" , notes = "有productId 展示商品信息，无productId 填写商品信息")
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @ApiOperation(value = "展示商品详情/填写新增的商品信息", notes = "有productId 展示商品信息，无productId 填写商品信息")
     public ModelAndView index(@RequestParam(required = false) String productId) {
         Map<String, Object> map = new HashMap<>();
         if (productId != null) {
@@ -106,9 +106,9 @@ public class SellerProductController {
         return new ModelAndView("product/index", map);
     }
 
-//    一般校验放在前端
+    //    一般校验放在前端
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    @ApiOperation(value = "新增/修改商品", notes = "有productId为修改商品，无productId为添加新的商品" ,response = ResultObject.class)
+    @ApiOperation(value = "新增/修改商品", notes = "有productId为修改商品，无productId为添加新的商品", response = ResultObject.class)
     public ModelAndView save(
             @RequestParam String productId,
             @RequestParam String productName,
@@ -117,19 +117,19 @@ public class SellerProductController {
             @RequestParam String productDescription,
             @RequestParam String productIcon,
             @RequestParam Integer categoryType
-            ) {
+    ) {
 
-        ProductInfo  productInfo = new ProductInfo();
-        Map<String , Object> map = new HashMap<>();
+        ProductInfo productInfo = new ProductInfo();
+        Map<String, Object> map = new HashMap<>();
         //添加商品
-        if(productId == ""){
+        if (productId == "") {
             productInfo.setProductId(KeyUtil.genUniqueKey());
-            log.info("【添加商品】 商品编号={}",productInfo.getProductId());
-            map.put("msg","添加商品成功");
+            log.info("【添加商品】 商品编号={}", productInfo.getProductId());
+            map.put("msg", "添加商品成功");
         }
         //修改商品
-        else{
-            map.put("msg","修改商品成功");
+        else {
+            map.put("msg", "修改商品成功");
             productInfo = productInfoService.findById(productId);
         }
 
@@ -140,9 +140,9 @@ public class SellerProductController {
         productInfo.setProductIcon(productIcon);
         productInfo.setCategoryType(categoryType);
 
-        productInfoService.save(productInfo);
-
-        map.put("url","/sell/seller/product/list");
-        return new ModelAndView("common/success",map);
+        ProductInfo save = productInfoService.save(productInfo);
+        log.info("save= {}",save);
+        map.put("url", "/sell/seller/product/list");
+        return new ModelAndView("common/success", map);
     }
 }

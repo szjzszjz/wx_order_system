@@ -15,6 +15,7 @@ public interface ProductCategoryService {
     ProductCategory findById(Integer categoryId);
 
     Page<ProductCategory> findAll(Pageable pageable);
+
     List<ProductCategory> findAll();
 
     List<ProductCategory> findByCategoryTypeIn(List<Integer> list);

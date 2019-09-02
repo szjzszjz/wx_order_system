@@ -12,7 +12,9 @@
                 您有新的订单
             </div>
             <div class="modal-footer">
-                <button onclick="javascript:document.getElementById('notice').pause()" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button onclick="javascript:document.getElementById('notice').pause()" type="button"
+                        class="btn btn-default" data-dismiss="modal">关闭
+                </button>
                 <button id="detailBtn" type="button" class="btn btn-primary">查看新的订单</button>
             </div>
         </div>
@@ -31,7 +33,7 @@
 <script>
     var websocket = null;
     if ('WebSocket' in window) {
-        websocket = new WebSocket('ws://szjz.natapp1.cc/sell/webSocket');
+        websocket = new WebSocket('ws://127.0.0.1:8888/sell/webSocket');
     } else {
         alert('该浏览器不支持websocket!')
     }
@@ -52,12 +54,12 @@
 
         //查看订单详情
         $('#detailBtn').click(function () {
-            location.href='/sell/seller/order/detail?orderId=' + event.data;
+            location.href = '/sell/seller/order/detail?orderId=' + event.data;
         })
 
     }
 
-    websocket.onerror = function(){
+    websocket.onerror = function () {
         alert('websocket通信发生错误');
     }
 

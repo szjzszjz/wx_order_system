@@ -118,12 +118,12 @@ public class BuyerOrderController {
     //订单列表
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ApiOperation(value = "订单列表", notes = "", response = ResultObject.class)
-    public ResultObject getOrderList(@RequestParam(defaultValue = "0",required = false) Integer pageNumber, //
-                                     @RequestParam(defaultValue = "10",required = false) Integer pageSize,//
+    public ResultObject getOrderList(@RequestParam(defaultValue = "0", required = false) Integer pageNumber, //
+                                     @RequestParam(defaultValue = "10", required = false) Integer pageSize,//
                                      @RequestParam String buyerOpenid) {
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         Page<OrderDTO> page = orderService.findAll(buyerOpenid, pageRequest);
-        if (page.getContent().size()==0){
+        if (page.getContent().size() == 0) {
             return ResultObjectUtil.success(ResultEnum.RESULT_IS_EMPTY);
         }
 
@@ -134,10 +134,10 @@ public class BuyerOrderController {
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     @ApiOperation(value = "订单详情", notes = "", response = ResultObject.class)
     public ResultObject getOrderDetail(@RequestParam String orderId,
-                                       @RequestParam String buyerOpenid){
+                                       @RequestParam String buyerOpenid) {
 
         OrderDTO orderDTO = orderService.findById(orderId);
-        if (!CheckOwnerUtil.check(buyerOpenid, orderDTO)){
+        if (!CheckOwnerUtil.check(buyerOpenid, orderDTO)) {
             return ResultObjectUtil.error(ResultEnum.OWNER_IS_ERROR);
         }
         return ResultObjectUtil.success(orderDTO);
@@ -148,9 +148,9 @@ public class BuyerOrderController {
     @RequestMapping(value = "/cancel", method = RequestMethod.PUT)
     @ApiOperation(value = "取消订单", notes = "", response = ResultObject.class)
     public ResultObject cancelOrder(@RequestParam String orderId,
-                                    @RequestParam String buyerOpenid){
+                                    @RequestParam String buyerOpenid) {
         OrderDTO or = orderService.findById(orderId);
-        if (!CheckOwnerUtil.check(buyerOpenid, or)){
+        if (!CheckOwnerUtil.check(buyerOpenid, or)) {
             return ResultObjectUtil.error(ResultEnum.OWNER_IS_ERROR);
         }
         orderService.cancelOrder(or);

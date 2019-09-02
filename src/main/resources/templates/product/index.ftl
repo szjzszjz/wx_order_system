@@ -38,13 +38,13 @@
                             <img height="200" width="200" src="${(productInfo.getProductIcon())!""}"><br>
                             <input type="text" class="form-control" name="productIcon" required
                                    value="${(productInfo.getProductIcon())!""}" onblur="do {
-                                        console.valueOf("fffff")
-                                    }"/>
+                                        console.valueOf(" fffff")
+                            }"/>
                         </div>
 
                         <div class="form-group">
                             <label>类目</label>
-                            <select name="categoryType" class="form-control" >
+                            <select name="categoryType" class="form-control">
                                 <#list productCategoryList as category>
                                     <option value="${category.getCategoryType()}"
                                             <#--对selected进行判断性选择 如果类目存在 且相等 才为选择状态-->
@@ -58,8 +58,8 @@
                             </select>
                         </div>
 
-                        <input hidden type="text"  name="productId" value="${(productInfo.getProductId())!""}">
                         <button type="submit" class="btn btn-default">Submit</button>
+                        <input hidden type="text" name="productId" value="${(productInfo.getProductId())!""}">
                     </form>
                 </div>
             </div>

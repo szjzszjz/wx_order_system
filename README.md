@@ -85,7 +85,7 @@ create table `product_info` (
 
 
 create  table `product_category` (
-	`catetory_id` int not null auto_increment,
+	`category_id` int not null auto_increment,
 	`category_name` varchar(64) not null comment '类目名称',
 	`category_type` int not null comment '类目编号',
 	`create_time` timestamp not null default current_timestamp comment '创建时间',

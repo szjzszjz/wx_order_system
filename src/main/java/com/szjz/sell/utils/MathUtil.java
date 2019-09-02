@@ -8,11 +8,11 @@ public class MathUtil {
 
     private final static double MONEY_RANGE = 0.01;
 
-    public static boolean equal(double d1,double d2){
+    public static boolean equal(double d1, double d2) {
         double abs = Math.abs(d1 - d2);
-        if(abs < MONEY_RANGE){
+        if (abs < MONEY_RANGE) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

@@ -37,6 +37,7 @@ public class PayController {
 
     /**
      * 创建支付
+     *
      * @param orderId
      * @param returnUrl
      * @param map
@@ -69,7 +70,6 @@ public class PayController {
         //返回给微信处理结果
         return new ModelAndView("pay/success");
     }
-
 
 
 }

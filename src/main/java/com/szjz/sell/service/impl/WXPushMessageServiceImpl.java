@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * 微信消息推送实现类
+ *
  * @author szjz
  * @date 2019/5/17 9:57
  */
@@ -41,18 +42,18 @@ public class WXPushMessageServiceImpl implements WXPushMessageService {
 
 
         List<WxMpTemplateData> data = Arrays.asList(
-                new WxMpTemplateData("first","请记得收货"),
-                new WxMpTemplateData("keyword1","微信点餐"),
-                new WxMpTemplateData("keyword2","18888888888"),
-                new WxMpTemplateData("keyword3",orderDTO.getOrderId()),
-                new WxMpTemplateData("keyword4",orderDTO.getOrderStatusEnum().getMessage()),
-                new WxMpTemplateData("keyword5","欢迎下次光临！")
+                new WxMpTemplateData("first", "请记得收货"),
+                new WxMpTemplateData("keyword1", "微信点餐"),
+                new WxMpTemplateData("keyword2", "18888888888"),
+                new WxMpTemplateData("keyword3", orderDTO.getOrderId()),
+                new WxMpTemplateData("keyword4", orderDTO.getOrderStatusEnum().getMessage()),
+                new WxMpTemplateData("keyword5", "欢迎下次光临！")
         );
         wxMpTemplateMessage.setData(data);
-        try{
+        try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(wxMpTemplateMessage);
-        }catch (WxErrorException e){
-            log.error("【微信模板消息】 发送失败 {}",e);
+        } catch (WxErrorException e) {
+            log.error("【微信模板消息】 发送失败 {}", e);
         }
     }
 }

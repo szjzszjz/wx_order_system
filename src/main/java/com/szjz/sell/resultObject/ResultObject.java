@@ -16,13 +16,19 @@ import java.io.Serializable;
 public class ResultObject<T> implements Serializable {
 
     private static final long serialVersionUID = 1578762596998649599L;
-    /** 错误码 */
+    /**
+     * 错误码
+     */
     private Integer code;
 
-    /** 提示信息 */
+    /**
+     * 提示信息
+     */
     private String message;
 
-    /** 返回的数据 */
+    /**
+     * 返回的数据
+     */
     @JsonProperty("data")
     private T data;
 

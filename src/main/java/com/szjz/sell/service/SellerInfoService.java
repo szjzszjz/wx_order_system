@@ -10,5 +10,5 @@ public interface SellerInfoService {
 
     SellerInfo findSellerInfoByOpenid(String openid);
 
-    SellerInfo findByUsernameAndPassword(String username ,String password);
+    SellerInfo findByUsernameAndPassword(String username, String password);
 }

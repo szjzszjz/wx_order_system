@@ -15,26 +15,38 @@ public interface ProductInfoService {
 
     ProductInfo findById(String id);
 
-    /** 分页查询所有的上架商品 */
+    /**
+     * 分页查询所有的上架商品
+     */
     List<ProductInfo> findUpAll();
 
-    /** 查询所有分页查询 */
+    /**
+     * 查询所有分页查询
+     */
     Page<ProductInfo> findAll(Pageable pageable);
 
     List<ProductInfo> findByProductStatus(Integer integer);
 
     ProductInfo save(ProductInfo productInfo);
 
-    /** 加库存 */
+    /**
+     * 加库存
+     */
     void increaseStock(List<CarDTO> carDTOList);
 
-    /** 减库存 */
+    /**
+     * 减库存
+     */
     void decreaseStock(List<CarDTO> carDTOList);
 
-    /** 下架 */
+    /**
+     * 下架
+     */
     ProductInfo offSale(String productId);
 
-    /** 上架 */
+    /**
+     * 上架
+     */
     ProductInfo onSale(String productId);
 
 }

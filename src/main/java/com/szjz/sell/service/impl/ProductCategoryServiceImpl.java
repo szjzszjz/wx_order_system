@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @Service
-public class ProductCategoryServiceImpl  implements ProductCategoryService{
+public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Autowired
     private ProductCategoryRepository repository;
@@ -26,10 +26,11 @@ public class ProductCategoryServiceImpl  implements ProductCategoryService{
         ProductCategory productCategory = repository.findById(categoryId).orElse(null);
         return productCategory;
     }
+
     //分页查询
     @Override
     public Page<ProductCategory> findAll(Pageable pageable) {
-        return  repository.findAll(pageable);
+        return repository.findAll(pageable);
     }
 
     @Override

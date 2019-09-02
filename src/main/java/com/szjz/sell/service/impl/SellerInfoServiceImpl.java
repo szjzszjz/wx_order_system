@@ -24,6 +24,6 @@ public class SellerInfoServiceImpl implements SellerInfoService {
 
     @Override
     public SellerInfo findByUsernameAndPassword(String username, String password) {
-        return sellerInfoRepository.findByUsernameAndPassword(username,password);
+        return sellerInfoRepository.findByUsernameAndPassword(username, password);
     }
 }

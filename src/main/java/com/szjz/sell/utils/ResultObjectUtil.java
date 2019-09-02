@@ -51,8 +51,10 @@ public class ResultObjectUtil {
         return ro;
     }
 
-    /** 返回错误 枚举信息 */
-    public static ResultObject error(ResultEnum resultEnum){
+    /**
+     * 返回错误 枚举信息
+     */
+    public static ResultObject error(ResultEnum resultEnum) {
         ResultObject<Object> ro = new ResultObject<>();
         ro.setCode(resultEnum.getCode());
         ro.setMessage(resultEnum.getMessage());

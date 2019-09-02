@@ -23,7 +23,7 @@
 </div>
 
 <script>
-    setTimeout('location.href="${url}"' ,3000);
+    setTimeout('location.href="${url}"', 3000);
 </script>
 </body>
 </html>

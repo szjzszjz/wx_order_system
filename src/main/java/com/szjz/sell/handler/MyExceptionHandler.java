@@ -35,19 +35,19 @@ public class MyExceptionHandler {
     @ResponseBody
     public ResultObject handler(Exception e) {
         if (e instanceof SellException) {
-            log.error("{}: {}",e.getClass().getSimpleName(),e);  // 打印异常便于处理
+            log.error("{}: {}", e.getClass().getSimpleName(), e);  // 打印异常便于处理
             SellException sellException = (SellException) e;
             return ResultObjectUtil.error(sellException.getCode(), e.getMessage());
-        }else {
-            log.error("【系统异常】 {}",e);
+        } else {
+            log.error("【系统异常】 {}", e);
             return ResultObjectUtil.error(-1, "未知异常");
         }
     }
 
     //拦截之后跳转到登录界面
     @ExceptionHandler(value = SellerAuthorizeException.class)
-    public ModelAndView authHandler(SellerAuthorizeException e){
-        log.error("{}",e);
-        return new ModelAndView("login/index");
+    public ModelAndView authHandler(SellerAuthorizeException e) {
+        log.error("{}", e);
+        return new ModelAndView("index.ftl");
     }
 }

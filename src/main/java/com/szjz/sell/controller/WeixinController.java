@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class WeixinController {
 
-    @RequestMapping(value = "/auth",method = RequestMethod.GET)
+    @RequestMapping(value = "/auth", method = RequestMethod.GET)
     @ApiOperation(value = "微信授权", notes = "", response = ResultObject.class)
-    public void auth(@RequestParam(value = "code",required = false) String code) {
+    public void auth(@RequestParam(value = "code", required = false) String code) {
         log.info("【微信授权】 开始。。。。。。。");
 
         log.info("code={}", code);

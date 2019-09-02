@@ -11,7 +11,7 @@ import java.nio.charset.Charset;
  */
 public class URLEncoderUtil {
 
-    public static String encoderUTF8(String url){
-      return URLEncoder.DEFAULT.encode(url, Charset.forName("utf-8"));
+    public static String encoderUTF8(String url) {
+        return URLEncoder.DEFAULT.encode(url, Charset.forName("utf-8"));
     }
 }

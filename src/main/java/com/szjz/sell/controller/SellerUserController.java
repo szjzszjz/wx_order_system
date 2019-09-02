@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Controller
-@RequestMapping("/seller/user")
+//@RequestMapping("/")
 public class SellerUserController {
 
     @Autowired
@@ -46,12 +46,12 @@ public class SellerUserController {
     @Autowired
     private ProjectUrlCofigProperty projectUrlCofigProperty;
 
-    @GetMapping("/index")
-    public ModelAndView index(){
+    @GetMapping("/")
+    public ModelAndView index() {
         return new ModelAndView("login/index");
     }
 
-    @GetMapping("/login")
+    @GetMapping("/seller/user/login")
     @ApiOperation(value = "卖家用户登录")
     public ModelAndView login(@RequestParam(required = false) String openid,
                               @RequestParam String username,
@@ -62,10 +62,10 @@ public class SellerUserController {
 
         //1、传入的openid去和数据库中的openid进行校验
         //SellerInfo sellerInfo = sellerInfoService.findSellerInfoByOpenid(openid);
-        SellerInfo sellerInfo = sellerInfoService.findByUsernameAndPassword(username,password);
+        SellerInfo sellerInfo = sellerInfoService.findByUsernameAndPassword(username, password);
 
         if (sellerInfo == null) {
-            log.error("【用户登录】 username={},password={},{} ",username,password, ResultEnum.LOGIN_ERROR_USER_NOT_EXIST.getMessage());
+            log.error("【用户登录】 username={},password={},{} ", username, password, ResultEnum.LOGIN_ERROR_USER_NOT_EXIST.getMessage());
             map.put("msg", ResultEnum.LOGIN_ERROR_USER_NOT_EXIST.getMessage());
             map.put("url", "/sell/seller/user/index");
             return new ModelAndView("common/error", map);
@@ -79,42 +79,42 @@ public class SellerUserController {
         //stringRedisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX,token),openid,expire, TimeUnit.SECONDS);
 
         //密码登录
-         Map<String , Object> loginMap = new HashMap<>();
-         loginMap.put("username",username);
-         loginMap.put("password",password);
-        stringRedisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX,token), JsonUtil.toJson(loginMap),expire, TimeUnit.SECONDS);
+        Map<String, Object> loginMap = new HashMap<>();
+        loginMap.put("username", username);
+        loginMap.put("password", password);
+        stringRedisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX, token), JsonUtil.toJson(loginMap), expire, TimeUnit.SECONDS);
 
 
         //3、设置token至客户端的cookis 每次登录就会携带上一次的服务器返回的token
-        CookieUtil.set(response, CookieConstant.TOKEN,token,expire);
+        CookieUtil.set(response, CookieConstant.TOKEN, token, expire);
 
         return new ModelAndView("redirect:" + projectUrlCofigProperty.getSell() + "/sell/seller/order/list");
     }
 
 
-    @GetMapping("/logout")
+    @GetMapping("/seller/user/logout")
     @ApiOperation(value = "卖家用户退出")
     public ModelAndView logout(HttpServletResponse response,
                                HttpServletRequest request) {
-         Map<String , Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
-         //从cookie中查询
+        //从cookie中查询
         Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
-        if(cookie== null){
+        if (cookie == null) {
             log.error("【用户登出】 {}", ResultEnum.LOGOUTED.getMessage());
             map.put("msg", ResultEnum.LOGOUTED.getMessage());
             map.put("url", "/sell/seller/user/login");
             return new ModelAndView("common/error", map);
         }
 
-        if(cookie != null){
+        if (cookie != null) {
             //清楚redis
-            stringRedisTemplate.opsForValue().getOperations().delete(String.format(RedisConstant.TOKEN_PREFIX,cookie.getValue()));
+            stringRedisTemplate.opsForValue().getOperations().delete(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));
             //清楚cookie
-            CookieUtil.set(response,CookieConstant.TOKEN,null,0);
+            CookieUtil.set(response, CookieConstant.TOKEN, null, 0);
         }
 
-        log.info("【用户登出】 {}",ResultEnum.LOGOUT_SUCCESS.getMessage());
+        log.info("【用户登出】 {}", ResultEnum.LOGOUT_SUCCESS.getMessage());
         return new ModelAndView("login/index");
     }
 

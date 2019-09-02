@@ -20,19 +20,19 @@ import java.util.List;
 @Slf4j
 public class OrderForm2OrderMasterConverter {
 
-    public static OrderDTO converter(OrderForm orderForm){
+    public static OrderDTO converter(OrderForm orderForm) {
 
         Gson gson = new Gson();
         List<OrderDetail> orderDetails = new ArrayList<>();
-        try{
+        try {
             orderDetails = gson.fromJson(orderForm.getItems(), new TypeToken<List<OrderDetail>>() {
             }.getType());
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("【对象转换】 对象转换错误 class=OrderForm2OrderMasterConverter");
         }
 
         OrderDTO orderDTO = new OrderDTO();
-        BeanUtils.copyProperties(orderForm,orderDTO);
+        BeanUtils.copyProperties(orderForm, orderDTO);
         orderDTO.setOrderDetailList(orderDetails);
         return orderDTO;
     }

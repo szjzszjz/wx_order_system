@@ -1,13 +1,9 @@
 package com.szjz.sell.utils;
 
-import com.szjz.sell.constant.CookieConstant;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,10 +20,10 @@ public class CookieUtil {
     /**
      * 设置cookie
      *
-     * @param response
-     * @param name
-     * @param value
-     * @param maxAge
+     * @param response http响应
+     * @param name     cookie键
+     * @param value    cookie值
+     * @param maxAge   过期时间
      */
     public static void set(HttpServletResponse response,
                            String name,
@@ -42,6 +38,7 @@ public class CookieUtil {
 
     /**
      * 获取cookie
+     *
      * @param request
      * @param cookieName
      * @return
@@ -49,8 +46,8 @@ public class CookieUtil {
     public static Cookie get(HttpServletRequest request,
                              String cookieName) {
 
-        Cookie[] cookies = request.getCookies(); 
-        if(cookies != null){
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals(cookieName)) {
                     return cookie;
@@ -65,14 +62,14 @@ public class CookieUtil {
         Map<String, Object> map = new HashMap<>();
 
         Cookie[] cookies = request.getCookies();
-        if(cookies != null){
+        if (cookies != null) {
             for (Cookie cookie : cookies) {
                 map.put(cookie.getName(), cookie);
             }
         }
-        if(map.containsKey(cookieName)){
+        if (map.containsKey(cookieName)) {
             return (Cookie) map.get(cookieName);
-        }else {
+        } else {
             return null;
         }
     }

@@ -2,7 +2,7 @@
 
 <configuration>
     <!--配置打印日志格式-->
-    <appender name = "consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
                 <!-- 打印的日志格式 时间+信息-->

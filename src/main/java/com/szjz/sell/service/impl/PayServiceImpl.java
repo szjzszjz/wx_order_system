@@ -69,14 +69,14 @@ public class PayServiceImpl implements PayService {
 
         //查询订单
         OrderDTO orderDTO = orderService.findById(payResponse.getOrderId());
-       //判断订单是否存在
-        if(orderDTO== null){
-            log.error("【微信支付】 异步通知 订单不存在 ，orderId={}",payResponse.getOrderId());
+        //判断订单是否存在
+        if (orderDTO == null) {
+            log.error("【微信支付】 异步通知 订单不存在 ，orderId={}", payResponse.getOrderId());
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
         //判断金额是否一致 bigDecimal类型不能和double类型直接比较  转换成bigDecimal类型 但是bigdecimal 类型
         //后面还会有很多的未知小数，double和bigdecimal依然不能完全相等  这时利用两值的差小于某个值来判断
-        if(!MathUtil.equal(orderDTO.getOrderAmount().doubleValue(),payResponse.getOrderAmount())){
+        if (!MathUtil.equal(orderDTO.getOrderAmount().doubleValue(), payResponse.getOrderAmount())) {
             log.error("【微信支付】 异步通知 订单金额不一致 orderId={} ,微信通知金额={}, 系统金额={}",
                     payResponse.getOrderId(),
                     payResponse.getOrderAmount(),
@@ -91,9 +91,10 @@ public class PayServiceImpl implements PayService {
 
     /**
      * 退款   利用sdk 只传递以下三个参数
-     *   "payTypeEnum": "WXPAY_H5",
-     *   "orderId": "123",
-     *   "orderAmount": 30.0
+     * "payTypeEnum": "WXPAY_H5",
+     * "orderId": "123",
+     * "orderAmount": 30.0
+     *
      * @param orderDTO
      * @return
      */
@@ -103,10 +104,10 @@ public class PayServiceImpl implements PayService {
         refundRequest.setOrderId(orderDTO.getOrderId());
         refundRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
         refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
-        log.info("【微信退款】 退款请求 refundRequest={}",JsonUtil.toJson(refundRequest));
+        log.info("【微信退款】 退款请求 refundRequest={}", JsonUtil.toJson(refundRequest));
 
         RefundResponse refundResponse = bestPayService.refund(refundRequest);
-        log.info("【微信退款】 退款响应 refundResponse={}",JsonUtil.toJson(refundResponse));
+        log.info("【微信退款】 退款响应 refundResponse={}", JsonUtil.toJson(refundResponse));
         return refundResponse;
     }
 }

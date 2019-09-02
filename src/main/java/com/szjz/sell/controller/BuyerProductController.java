@@ -38,7 +38,7 @@ public class BuyerProductController {
 
     @GetMapping(value = "/list")
     @ApiOperation(value = "查询所有商品", notes = "", response = ResultObject.class)
-    @Cacheable(cacheNames = "product",key="123")  //实现Redis缓存
+    @Cacheable(cacheNames = "product", key = "123")  //实现Redis缓存
     public ResultObject getList() {
 
         /** 查询所有的商品 */

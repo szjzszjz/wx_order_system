@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author szjz
  * @date 2019/5/13 14:42
- *
+ * <p>
  * 微信支付配置
  */
 
@@ -21,14 +21,14 @@ public class WechatPayConfig {
     private WechatAccountConfigProperty wechatAccountConfigProperty;
 
     @Bean
-    public BestPayServiceImpl bestPayService(){
+    public BestPayServiceImpl bestPayService() {
         BestPayServiceImpl bestPayService = new BestPayServiceImpl();
         bestPayService.setWxPayH5Config(wxPayH5Config());
         return bestPayService;
     }
 
     @Bean
-    public WxPayH5Config wxPayH5Config(){
+    public WxPayH5Config wxPayH5Config() {
         WxPayH5Config wxPayH5Config = new WxPayH5Config();
         wxPayH5Config.setAppId(wechatAccountConfigProperty.getMpAppId());
         wxPayH5Config.setAppSecret(wechatAccountConfigProperty.getMpAppSecret());

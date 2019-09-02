@@ -31,7 +31,8 @@
                                 <td>${category.getCategoryType()}</td>
                                 <td>${category.createTime}</td>
                                 <td>${category.updateTime}</td>
-                                <td><a href="/sell/seller/category/index?categoryId=${category.getCategoryId()}">修改</a></td>
+                                <td><a href="/sell/seller/category/index?categoryId=${category.getCategoryId()}">修改</a>
+                                </td>
                             </tr>
                         </#list>
                         </tbody>

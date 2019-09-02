@@ -65,12 +65,12 @@ public class SellerOrderController {
             orderService.cancelOrder(orderDTO);
         } catch (SellException e) {
             e.printStackTrace();
-            map.put("title","订单取消异常");
+            map.put("title", "订单取消异常");
             map.put("msg", e.getMessage());
             map.put("url", "/sell/seller/order/list");
             return new ModelAndView("common/error", map);
         }
-        map.put("msg",ResultEnum.ORDER_CANCEL_SUCCESS.getMessage());
+        map.put("msg", ResultEnum.ORDER_CANCEL_SUCCESS.getMessage());
         map.put("url", "/sell/seller/order/list");
         return new ModelAndView("common/success", map);
 
@@ -81,17 +81,17 @@ public class SellerOrderController {
     public ModelAndView finish(@RequestParam String orderId) {
         Map<String, Object> map = new HashMap<>();
         OrderDTO orderDTO;
-        try{
+        try {
             orderDTO = orderService.findById(orderId);
             orderService.finishOrder(orderDTO);
-        }catch (SellException e){
+        } catch (SellException e) {
             e.printStackTrace();
-            map.put("title","订单完结异常");
+            map.put("title", "订单完结异常");
             map.put("msg", e.getMessage());
             map.put("url", "/sell/seller/order/list");
             return new ModelAndView("order/error", map);
         }
-        map.put("msg",ResultEnum.ORDER_FINISH_SUCCESS.getMessage());
+        map.put("msg", ResultEnum.ORDER_FINISH_SUCCESS.getMessage());
         map.put("url", "/sell/seller/order/list");
         return new ModelAndView("common/success", map);
     }
@@ -110,12 +110,10 @@ public class SellerOrderController {
             return new ModelAndView("common/error", map);
         }
 
-        map.put("orderDTO",orderDTO);
+        map.put("orderDTO", orderDTO);
         return new ModelAndView("order/detail", map);
 
     }
-
-
 
 
 }

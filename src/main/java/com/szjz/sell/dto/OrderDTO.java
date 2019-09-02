@@ -24,39 +24,58 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL) //如果字段為null则不返回 给前端
 public class OrderDTO extends OrderMaster {
 
-    /** 订单id */
+    /**
+     * 订单id
+     */
     private String orderId;
 
-    /** 买家名字 */
+    /**
+     * 买家名字
+     */
     private String buyerName;
 
-    /** 买家手机号 */
+    /**
+     * 买家手机号
+     */
     private String buyerPhone;
 
-    /** 买家地址 */
+    /**
+     * 买家地址
+     */
     private String buyerAddress;
 
-    /** 买家微信openid */
+    /**
+     * 买家微信openid
+     */
     private String buyerOpenid;
 
-    /** 订单总金额 */
+    /**
+     * 订单总金额
+     */
     private BigDecimal orderAmount;
 
-    /** 订单状态 默认新订单0*/
+    /**
+     * 订单状态 默认新订单0
+     */
     private Integer orderStatus;
 
-    /** 支付状态 默认等待支付0*/
+    /**
+     * 支付状态 默认等待支付0
+     */
     private Integer payStatus;
 
-    /** 添加订单详情列表 */
+    /**
+     * 添加订单详情列表
+     */
     private List<OrderDetail> orderDetailList;
 
     @JsonIgnore  //json 转对象就会忽略掉带这个注解的属性
-    public OrderStatusEnum getOrderStatusEnum(){
-        return  EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    public OrderStatusEnum getOrderStatusEnum() {
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
     }
+
     @JsonIgnore
-    public PayStatusEnum getPayStatusEnum(){
+    public PayStatusEnum getPayStatusEnum() {
         return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
     }
 

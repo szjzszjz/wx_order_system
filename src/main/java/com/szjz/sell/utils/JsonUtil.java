@@ -10,8 +10,10 @@ import com.google.gson.GsonBuilder;
  */
 public class JsonUtil {
 
-    /** 对象转json */
-    public static String toJson(Object object){
+    /**
+     * 对象转json
+     */
+    public static String toJson(Object object) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         Gson gson = gsonBuilder.create();

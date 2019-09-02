@@ -24,7 +24,7 @@
                                    value="${(productCategory.getCategoryType())!""}"/>
                         </div>
 
-                        <input hidden type="number"  name="categoryId" value="${(productCategory.getCategoryId())!""}">
+                        <input hidden type="number" name="categoryId" value="${(productCategory.getCategoryId())!""}">
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                 </div>

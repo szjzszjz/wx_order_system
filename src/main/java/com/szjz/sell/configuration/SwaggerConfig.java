@@ -35,7 +35,7 @@ public class SwaggerConfig {
     private final Logger logger = LoggerFactory.getLogger(SwaggerConfig.class);
 
 //    @Resource
-//    private ConfigProperties configProperties;
+//    private properties configProperties;
 
     @Bean
     public Docket createRestApi() {

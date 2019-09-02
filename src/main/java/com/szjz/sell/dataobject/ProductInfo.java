@@ -26,36 +26,54 @@ public class ProductInfo implements Serializable {
     @Id
     private String productId;
 
-    /** 名称 */
+    /**
+     * 名称
+     */
     @Column(nullable = false)
     private String ProductName;
 
-    /**单价*/
+    /**
+     * 单价
+     */
     private BigDecimal productPrice;
 
-    /** 库存*/
+    /**
+     * 库存
+     */
     private Integer productStock;
 
-    /**描述*/
+    /**
+     * 描述
+     */
     private String productDescription;
 
-    /**小图*/
+    /**
+     * 小图
+     */
     private String productIcon;
 
-    /**状态 0 上架 1 下架 默认为上架*/
+    /**
+     * 状态 0 上架 1 下架 默认为上架
+     */
     private Integer productStatus = ProductStatusEnum.UP.getCode();
-    
-    /** 类目编号 */
+
+    /**
+     * 类目编号
+     */
     private Integer categoryType;
 
-    /** 创建时间 */
+    /**
+     * 创建时间
+     */
     private Date createTime;
 
-    /** 修改时间 */
+    /**
+     * 修改时间
+     */
     private Date updateTime;
 
     @JsonIgnore
-    public ProductStatusEnum getProductStatusEnum(){
-        return EnumUtil.getByCode(productStatus ,ProductStatusEnum.class);
+    public ProductStatusEnum getProductStatusEnum() {
+        return EnumUtil.getByCode(productStatus, ProductStatusEnum.class);
     }
 }
