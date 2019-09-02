@@ -1,7 +1,7 @@
 # wx_order_system
-微信点餐系统
+## 微信点餐系统
 
-* 系统要求：  
+## 系统要求：  
 Linux：centos7.3  
 jdk:1.8.0  
 mysql:5.7.17  
@@ -62,75 +62,15 @@ https://github.com/Pay-Group/best-pay-sdk
 * 微信开放平台  
 https://open.weixin.qq.com/  
 
-测试，，
-
-
-
-
-* 表格：  
+## 知识点
+### websocket  
+[前端websocket](https://github.com/szjzszjz/wx_order_system/blob/master/src/main/resources/templates/common/websocket.ftl)  
+[后台websocket](https://github.com/szjzszjz/wx_order_system/blob/master/src/main/java/com/szjz/sell/service/WebSocket.java)  
+后台出发websocket向前端发送信息  
+```java
+//用户下单成功调用websocket消息推送
+webSocket.sendMessage(orderDTO.getOrderId());
 ```
-create table `product_info` (
-	`product_id` varchar(32) not null,
-	`product_name` varchar(64) not null comment '商品名称',
-	`product_price` decimal(8,2) not null comment '单价',
-	`product_stock` int not null comment '库存',
-	`product_description` varchar(64) comment '描述',
-	`product_icon` varchar(512) comment '小图',
-	`product_status` int not null default 0 comment '上架 0 下架 1'
-	`category_type` int not null comment '类目编号',
-	`create_time` timestamp not null default current_timestamp comment '创建时间',
-	`update_time` timestamp not null default current_timestamp on update current_timestamp comment '修改时间',
-	primary key (`product_id`)
-)comment '商品表';
 
+### [数据库表格](https://github.com/szjzszjz/wx_order_system/blob/master/src/main/resources/static/sql/sell.sql)
 
-create  table `product_category` (
-	`category_id` int not null auto_increment,
-	`category_name` varchar(64) not null comment '类目名称',
-	`category_type` int not null comment '类目编号',
-	`create_time` timestamp not null default current_timestamp comment '创建时间',
-	`update_time` timestamp not null default current_timestamp on update current_timestamp comment '修改时间',
-	primary key (`catetory_id`),
-	unique key `uqe_category_type` (`category_type`)
-)comment '类目表';	
-
-
-create table `order_master` (
-	`order_id` varchar(32) not null,
-	`buyer_name` varchar(32) not null comment '买家名字',
-	`buyer_phone` varchar(32) not null comment '买家电话',
-	`buyer_address` varchar(128) not null comment '买家地址',
-	`buyer_openid` varchar(64) not null comment '买家微信openid',
-	`order_amount` decimal(8,2) not null comment '订单总金额',
-	`order_status` tinyint(3) not null default '0' comment '订单状态，默认0新下单',
-	`pay_status` tinyint(3) not null default '0' comment '支付状态，默认0未支付',
-	`create_time` timestamp not null default current_timestamp comment '创建时间',
-	`update_time` timestamp not null default current_timestamp on update current_timestamp comment '修改时间',
-	primary key (`order_id`),
-	key `idx_buyer_openid` (`buyer_openid`)
-)comment '订单表';
-
-create table `order_detail` (
-	`detail_id` varchar(32) not null,
-	`order_id` varchar(32) not null,
-	`product_id` varchar(32) not null,
-	`product_name` varchar(64) not null comment '商品名称',
-	`product_price` decimal(8,2) not null comment '商品价格',
-	`product_quantity` int not null comment '商品数量',
-	`product_icon` varchar(512) not null comment '商品小图',
-	`create_time` timestamp not null default current_timestamp comment '创建时间',
-	`update_time` timestamp not null default current_timestamp on update current_timestamp comment '修改时间',
-	primary key (`detail_id`),
-	key `idx_order_id` (`order_id`) comment '索引'
- )comment '订单详情表';
- 
- CREATE TABLE `seller_info` (
-   `seller_id` varchar(32) NOT NULL,
-   `username` varchar(32) NOT NULL,
-   `password` varchar(32) NOT NULL,
-   `openid` varchar(64) NOT NULL COMMENT '微信openID',
-   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-   PRIMARY KEY (`seller_id`)
- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='卖家信息表';
- ```
