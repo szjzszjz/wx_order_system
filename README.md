@@ -72,7 +72,7 @@ https://open.weixin.qq.com/
 ```
 [前端websocket](https://github.com/szjzszjz/wx_order_system/blob/master/src/main/resources/templates/common/websocket.ftl)  
 [后台websocket](https://github.com/szjzszjz/wx_order_system/blob/master/src/main/java/com/szjz/sell/service/WebSocket.java)  
-后台出发websocket向前端发送信息  
+后台触发websocket向前端发送信息  
 ```text
 //用户下单成功调用websocket消息推送
 webSocket.sendMessage(orderDTO.getOrderId());
